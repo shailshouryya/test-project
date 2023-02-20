@@ -16,3 +16,147 @@ This project contains a dummy python project to
       - [Packaging binary extensions](https://packaging.python.org/en/latest/guides/packaging-binary-extensions/)
     - packaging.python.org landing page: [Python Packaging User Guide](https://packaging.python.org/en/latest/)
       - maintained by [Python Packaging Authority](https://www.pypa.io/en/latest/)
+
+## Project Structure
+
+Note that some of the files below are configuration/build/binary files auto-generated after running commands to set up the package locally, and are NOT included in the repo:
+- the `python3 setup.py sdist` commands creates
+  - `dist/test-project-0.0.0.tar.gz`
+  - `test_project.egg-info` (and nested contents)
+- the `python3 setup.py bdist_wheel` command creates
+  - `dist/test_project-0.0.0-py3-none-any.whl`
+  - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
+  - `build/lib/`(and nested contents)
+  - `test_project.egg-info` (and nested contents)
+- the `python3 setup.py bdist_wheel` command creates
+  - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
+  - `build/lib/`(and nested contents)
+  - `test_project.egg-info` (and nested contents)
+
+Also note that running python files as modules locally creates a `__pycache__` directory and `.pyc` file nested inside the `__pycache__` directory (which were manually excluded from the structure below) for that corresponding module!
+- note that this
+  - only happens when running `python3 -m path.to.module.name`
+  - does NOT happen when running `python3 path/to/module/name.py`
+
+
+(structure taken from the output of the `tree` command run from the `test-project/python` directory)
+```
+.
+├── README.md
+├── build
+│   ├── bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo
+│   └── lib
+│       ├── package_a
+│       │   ├── __init__.py
+│       │   ├── module_a.py
+│       │   ├── module_b.py
+│       │   ├── module_c.py
+│       │   ├── module_d.py
+│       │   └── module_e.py
+│       ├── package_b
+│       │   ├── __init__.py
+│       │   ├── module_a.py
+│       │   ├── module_b.py
+│       │   ├── module_c.py
+│       │   ├── module_d.py
+│       │   └── module_e.py
+│       ├── package_c
+│       │   ├── __init__.py
+│       │   ├── module_a.py
+│       │   ├── module_b.py
+│       │   ├── module_c.py
+│       │   ├── module_d.py
+│       │   └── module_e.py
+│       └── test_project_python
+│           ├── __init__.py
+│           └── __main__.py
+├── dist
+│   ├── test-project-0.0.0.tar.gz
+│   └── test_project-0.0.0-py3-none-any.whl
+├── make_nested_py_modules.sh
+├── package_a
+│   ├── __init__.py
+│   ├── module_a.py
+│   ├── module_b.py
+│   ├── module_c.py
+│   ├── module_d.py
+│   ├── module_e.py
+│   ├── subpackage_a
+│   │   ├── a.py
+│   │   ├── b.py
+│   │   ├── c.py
+│   │   ├── d.py
+│   │   └── e.py
+│   ├── subpackage_b
+│   │   ├── a.py
+│   │   ├── b.py
+│   │   ├── c.py
+│   │   ├── d.py
+│   │   └── e.py
+│   └── subpackage_c
+│       ├── a.py
+│       ├── b.py
+│       ├── c.py
+│       ├── d.py
+│       └── e.py
+├── package_b
+│   ├── __init__.py
+│   ├── module_a.py
+│   ├── module_b.py
+│   ├── module_c.py
+│   ├── module_d.py
+│   ├── module_e.py
+│   ├── subpackage_a
+│   │   ├── a.py
+│   │   ├── b.py
+│   │   ├── c.py
+│   │   ├── d.py
+│   │   └── e.py
+│   ├── subpackage_b
+│   │   ├── a.py
+│   │   ├── b.py
+│   │   ├── c.py
+│   │   ├── d.py
+│   │   └── e.py
+│   └── subpackage_c
+│       ├── a.py
+│       ├── b.py
+│       ├── c.py
+│       ├── d.py
+│       └── e.py
+├── package_c
+│   ├── __init__.py
+│   ├── module_a.py
+│   ├── module_b.py
+│   ├── module_c.py
+│   ├── module_d.py
+│   ├── module_e.py
+│   ├── subpackage_a
+│   │   ├── a.py
+│   │   ├── b.py
+│   │   ├── c.py
+│   │   ├── d.py
+│   │   └── e.py
+│   ├── subpackage_b
+│   │   ├── a.py
+│   │   ├── b.py
+│   │   ├── c.py
+│   │   ├── d.py
+│   │   └── e.py
+│   └── subpackage_c
+│       ├── a.py
+│       ├── b.py
+│       ├── c.py
+│       ├── d.py
+│       └── e.py
+├── setup.py
+├── test_project.egg-info
+│   ├── PKG-INFO
+│   ├── SOURCES.txt
+│   ├── dependency_links.txt
+│   ├── entry_points.txt
+│   └── top_level.txt
+└── test_project_python
+    ├── __init__.py
+    ├── __main__.py
+```
