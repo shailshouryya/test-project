@@ -1,3 +1,4 @@
+rm -r package_*
 for package_letter in {a..c}; do
     package_name="package_$package_letter"
     echo "package_name is $package_name"
