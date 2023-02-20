@@ -137,7 +137,8 @@ setup(
 
      entry_points={  # Optional
        'console_scripts': [
-           'command_name=test_project_python:function_name', # compare the output of `command_name` versus `python3 -m test_project_python`
+           'command_name=test_project_python:function_name',                                        # compare the output of `command_name`                         versus `python3 -m test_project_python`
+           'command_name_for_function_in__main__=test_project_python.__main__:function_in__main__', # compare the output of `command_name_for_function_in__main__` versus `python3 -m test_project_python`
        ],
     },
 
