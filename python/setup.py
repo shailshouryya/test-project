@@ -90,15 +90,50 @@ setup(
     # data_files=[('my_data', ['data/data_file'])],  # Optional
 
 
-    # To provide executable scripts, use entry points in preference to the "scripts" keyword.
-    # Entry points provide cross-platform support and allow `pip` to create the appropriate form of executable for the target platform.
-    # For example, the following would provide a command called `test_project_python` which executes the code in the module `__main__` from this package when invoked directly from the command line:
-    entry_points={  # Optional
-       'console_scripts': [
-           'test_project_python=test_project_python:__main__',
-       ],
-    },
-
+    # # To provide executable scripts, use entry points in preference to the "scripts" keyword.
+    # # Entry points provide cross-platform support and allow `pip` to create the appropriate form of executable for the target platform.
+    # # For example, the following would provide a command called `test_project_python` which
+    # #   tries to run a __main__ function (or whatever comes after the ":" (colon) for the defined command) from
+    # #   the test_project_python package when invoked directly from the command line
+    # # This means we
+    # #   - load test_project_python.__init__
+    # #     - the __init__ module subsequently loads all other modules in the test_project_python package including the __main__ module
+    # #   - try to call a __main__ function from whatever is loaded in this (__init__ module) namespace
+    # #   - fail since the __init__ module loads the __main__ module
+    # #     - therefore, there is no __main__ function in the test_project_python namespace since
+    # #       the __main__ we loaded is a reference to the test_project_python.__main__ module
+    # # - see https://stackoverflow.com/a/782984 for a better explanation
+    # entry_points={  # Optional
+    #    'console_scripts': [
+    #        'test_project_python=test_project_python:__main__',
+    #    ],
+    # },
+    #
+    #
+    # # contents of /home/USERNAME/.local/bin/test_project_python after running the above:
+    #
+    # # #!/usr/bin/python3
+    # # # -*- coding: utf-8 -*-
+    # # import re
+    # # import sys
+    # # from test_project_python import __main__
+    # # if __name__ == '__main__':
+    # #     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    # #     sys.exit(__main__())
+    #
+    # # the test_project_python command FAILS
+    # # if a `__main__` function is not defined inside
+    # # test_project_python (inside the test_project_python.__init__ namespace):
+    #
+    # # $ test_project_python
+    # # Entered test_project_python.__main__ :)
+    # # Traceback (most recent call last):
+    # #   File "/home/USERNAME/.local/bin/test_project_python", line 8, in <module>
+    # #     sys.exit(__main__())
+    # # TypeError: 'module' object is not callable
+    # # potential useful references:
+    # #   https://stackoverflow.com/questions/4534438/typeerror-module-object-is-not-callable
+    # #   https://stackoverflow.com/questions/5280203/what-does-this-mean-exit-main
 
     project_urls = {
         'Bug Reports':  'https://github.com/shailshouryya/test-project/issues',
