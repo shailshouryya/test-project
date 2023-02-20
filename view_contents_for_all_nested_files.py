@@ -17,6 +17,7 @@ def main(include_only='.', exclude_directory=None):
 def print_all_nested_files_to_console(directory, exclude_directory):
     for file_name in find_all_nested_files(directory, exclude_directory):
         with open(file_name, mode='r', encoding='utf-8', buffering=-1) as file:
+            print_boundary()
             print(f'Contents of {file_name}:')
             print(file.read())
             print_boundary()
