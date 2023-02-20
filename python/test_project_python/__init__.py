@@ -1,3 +1,5 @@
+print('Entered test_project_python.__init__ :)')
+
 def function_name():
     print('Ran test_project_python.__init__.function_name')
     return True
