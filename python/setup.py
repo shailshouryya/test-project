@@ -112,7 +112,7 @@ setup(
     #
     # # contents of /home/USERNAME/.local/bin/test_project_python after running the above:
     #
-    # # #!/usr/bin/python3
+    # # #!/path/to/your/bin/for/python_command
     # # # -*- coding: utf-8 -*-
     # # import re
     # # import sys
