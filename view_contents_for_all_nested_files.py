@@ -19,7 +19,7 @@ def print_all_nested_files_to_console(directory, exclude_directory):
         with open(file_name, mode='r', encoding='utf-8', buffering=-1) as file:
             print(f'Contents of {file_name}:')
             print(file.read())
-            print('=' * 50)
+            print_boundary()
 
 def find_all_nested_files(directory, exclude_directory):
     for current_directory, nested_directories, files in os.walk(directory):
@@ -27,6 +27,10 @@ def find_all_nested_files(directory, exclude_directory):
             continue
         for file in files: # does not enter this block if `files` is empty
             yield f'{current_directory}/{file}'
+
+
+def print_boundary():
+    print('=' * 50)
 
 
 if __name__ == '__main__':
