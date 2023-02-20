@@ -148,3 +148,30 @@ setup(
         'Source':       'https://github.com/shailshouryya/test-project'
     },
 )
+
+'''
+files created by setuptools for the commands specified in entry_points['console_scripts'] for reference:
+
+
+# contents of /path/to/your/bin/for/python_command/command_name:
+#!/path/to/your/bin/for/python_command
+# -*- coding: utf-8 -*-
+import re
+import sys
+from test_project_python import function_name
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(function_name())
+
+
+# contents of /path/to/your/bin/for/python_command/command_name_for_function_in__main__:
+#!/path/to/your/bin/for/python_command
+# -*- coding: utf-8 -*-
+import re
+import sys
+from test_project_python.__main__ import function_in__main__
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(function_in__main__())
+
+'''
