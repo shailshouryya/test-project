@@ -160,3 +160,7 @@ Also note that running python files as modules locally creates a `__pycache__` d
     ├── __init__.py
     ├── __main__.py
 ```
+
+## Releases
+
+See the [latest release](https://github.com/shailshouryya/test-project/releases/tag/0.0.1-python) from the [releases page](https://github.com/shailshouryya/test-project/releases)

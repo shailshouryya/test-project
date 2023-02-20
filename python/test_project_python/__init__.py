@@ -1,3 +1,5 @@
+__version__ = '0.0.1'
+
 print('Entered test_project_python.__init__ :)')
 
 def function_name():
