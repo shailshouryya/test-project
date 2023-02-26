@@ -1,3 +1,8 @@
+# DEPRECATED
+# leaving this here for reference, but future work
+#   will take place in make_nested_py_modules.py to
+#   more easily support cross-platform builds
+
 rm -r package_*
 for package_letter in {a..c}; do
     package_name="package_$package_letter"
