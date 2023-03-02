@@ -24,8 +24,8 @@ Note that some of the files below are configuration/build/binary files auto-gene
   - `dist/test-project-python-0.0.1.tar.gz`
   - `test_project_python.egg-info` (and nested contents)
 - the `python3 setup.py bdist_wheel` command creates
-  - `dist/test_project_python-0.0.1-py3-none-any.whl`
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
+  - `dist/test_project_python-0.0.1-py3-none-any.whl`
   - `build/lib/`(and nested contents)
   - `test_project_python.egg-info` (and nested contents)
 - the `pip3 install .` command creates
