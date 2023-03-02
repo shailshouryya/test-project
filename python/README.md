@@ -21,17 +21,17 @@ This project contains a dummy python project to
 
 Note that some of the files below are configuration/build/binary files auto-generated after running commands to set up the package locally, and are NOT included in the repo:
 - the `python3 setup.py sdist` commands creates
-  - `dist/test-project-0.0.0.tar.gz`
-  - `test_project.egg-info` (and nested contents)
+  - `dist/test-project-python-0.0.1.tar.gz`
+  - `test_project_python.egg-info` (and nested contents)
 - the `python3 setup.py bdist_wheel` command creates
-  - `dist/test_project-0.0.0-py3-none-any.whl`
+  - `dist/test_project_python-0.0.1-py3-none-any.whl`
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
   - `build/lib/`(and nested contents)
-  - `test_project.egg-info` (and nested contents)
+  - `test_project_python.egg-info` (and nested contents)
 - the `python3 setup.py bdist_wheel` command creates
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
   - `build/lib/`(and nested contents)
-  - `test_project.egg-info` (and nested contents)
+  - `test_project_python.egg-info` (and nested contents)
 
 Also note that running python files as modules locally creates a `__pycache__` directory and `.pyc` file nested inside the `__pycache__` directory (which were manually excluded from the structure below) for that corresponding module!
 - note that this
@@ -71,8 +71,8 @@ Also note that running python files as modules locally creates a `__pycache__` d
 │           ├── __init__.py
 │           └── __main__.py
 ├── dist
-│   ├── test-project-0.0.0.tar.gz
-│   └── test_project-0.0.0-py3-none-any.whl
+│   ├── test-project-python-0.0.1.tar.gz
+│   └── test_project-python-0.0.1-py3-none-any.whl
 ├── make_nested_py_modules.sh
 ├── package_a
 │   ├── __init__.py
@@ -150,15 +150,15 @@ Also note that running python files as modules locally creates a `__pycache__` d
 │       ├── d.py
 │       └── e.py
 ├── setup.py
-├── test_project.egg-info
-│   ├── PKG-INFO
-│   ├── SOURCES.txt
-│   ├── dependency_links.txt
-│   ├── entry_points.txt
-│   └── top_level.txt
 └── test_project_python
-    ├── __init__.py
-    ├── __main__.py
+│   ├── __init__.py
+│   ├── __main__.py
+└── test_project_python.egg-info
+    ├── PKG-INFO
+    ├── SOURCES.txt
+    ├── dependency_links.txt
+    ├── entry_points.txt
+    └── top_level.txt
 ```
 
 ## Releases
