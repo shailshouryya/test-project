@@ -52,21 +52,84 @@ Also note that running python files as modules locally creates a `__pycache__` d
 │       │   ├── module_b.py
 │       │   ├── module_c.py
 │       │   ├── module_d.py
-│       │   └── module_e.py
+│       │   ├── module_e.py
+│       │   ├── subpackage_a
+│       │   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_a
+│       │   │   ├── a.py
+│       │   │   ├── b.py
+│       │   │   ├── c.py
+│       │   │   ├── d.py
+│       │   │   └── e.py
+│       │   ├── subpackage_b
+│       │   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_b
+│       │   │   ├── a.py
+│       │   │   ├── b.py
+│       │   │   ├── c.py
+│       │   │   ├── d.py
+│       │   │   └── e.py
+│       │   └── subpackage_c
+│       │       ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_c
+│       │       ├── a.py
+│       │       ├── b.py
+│       │       ├── c.py
+│       │       ├── d.py
+│       │       └── e.py
 │       ├── package_b
 │       │   ├── __init__.py
 │       │   ├── module_a.py
 │       │   ├── module_b.py
 │       │   ├── module_c.py
 │       │   ├── module_d.py
-│       │   └── module_e.py
+│       │   ├── module_e.py
+│       │   ├── subpackage_a
+│       │   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_a
+│       │   │   ├── a.py
+│       │   │   ├── b.py
+│       │   │   ├── c.py
+│       │   │   ├── d.py
+│       │   │   └── e.py
+│       │   ├── subpackage_b
+│       │   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_b
+│       │   │   ├── a.py
+│       │   │   ├── b.py
+│       │   │   ├── c.py
+│       │   │   ├── d.py
+│       │   │   └── e.py
+│       │   └── subpackage_c
+│       │       ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_c
+│       │       ├── a.py
+│       │       ├── b.py
+│       │       ├── c.py
+│       │       ├── d.py
+│       │       └── e.py
 │       ├── package_c
 │       │   ├── __init__.py
 │       │   ├── module_a.py
 │       │   ├── module_b.py
 │       │   ├── module_c.py
 │       │   ├── module_d.py
-│       │   └── module_e.py
+│       │   ├── module_e.py
+│       │   ├── subpackage_a
+│       │   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_a
+│       │   │   ├── a.py
+│       │   │   ├── b.py
+│       │   │   ├── c.py
+│       │   │   ├── d.py
+│       │   │   └── e.py
+│       │   ├── subpackage_b
+│       │   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_b
+│       │   │   ├── a.py
+│       │   │   ├── b.py
+│       │   │   ├── c.py
+│       │   │   ├── d.py
+│       │   │   └── e.py
+│       │   └── subpackage_c
+│       │       ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_c
+│       │       ├── a.py
+│       │       ├── b.py
+│       │       ├── c.py
+│       │       ├── d.py
+│       │       └── e.py
 │       └── test_project_python
 │           ├── __init__.py
 │           └── __main__.py
@@ -82,18 +145,21 @@ Also note that running python files as modules locally creates a `__pycache__` d
 │   ├── module_d.py
 │   ├── module_e.py
 │   ├── subpackage_a
+│   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_a
 │   │   ├── a.py
 │   │   ├── b.py
 │   │   ├── c.py
 │   │   ├── d.py
 │   │   └── e.py
 │   ├── subpackage_b
+│   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_b
 │   │   ├── a.py
 │   │   ├── b.py
 │   │   ├── c.py
 │   │   ├── d.py
 │   │   └── e.py
 │   └── subpackage_c
+│       ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_c
 │       ├── a.py
 │       ├── b.py
 │       ├── c.py
@@ -107,18 +173,21 @@ Also note that running python files as modules locally creates a `__pycache__` d
 │   ├── module_d.py
 │   ├── module_e.py
 │   ├── subpackage_a
+│   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_a
 │   │   ├── a.py
 │   │   ├── b.py
 │   │   ├── c.py
 │   │   ├── d.py
 │   │   └── e.py
 │   ├── subpackage_b
+│   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_b
 │   │   ├── a.py
 │   │   ├── b.py
 │   │   ├── c.py
 │   │   ├── d.py
 │   │   └── e.py
 │   └── subpackage_c
+│       ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_c
 │       ├── a.py
 │       ├── b.py
 │       ├── c.py
@@ -132,18 +201,21 @@ Also note that running python files as modules locally creates a `__pycache__` d
 │   ├── module_d.py
 │   ├── module_e.py
 │   ├── subpackage_a
+│   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_a
 │   │   ├── a.py
 │   │   ├── b.py
 │   │   ├── c.py
 │   │   ├── d.py
 │   │   └── e.py
 │   ├── subpackage_b
+│   │   ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_b
 │   │   ├── a.py
 │   │   ├── b.py
 │   │   ├── c.py
 │   │   ├── d.py
 │   │   └── e.py
 │   └── subpackage_c
+│       ├── __init__.py    # this __init__.py module MUST exist for setuptools to *automatically* detect subpackage_c
 │       ├── a.py
 │       ├── b.py
 │       ├── c.py
