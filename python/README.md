@@ -28,7 +28,7 @@ Note that some of the files below are configuration/build/binary files auto-gene
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
   - `build/lib/`(and nested contents)
   - `test_project_python.egg-info` (and nested contents)
-- the `python3 setup.py bdist_wheel` command creates
+- the `pip3 install .` command creates
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
   - `build/lib/`(and nested contents)
   - `test_project_python.egg-info` (and nested contents)
