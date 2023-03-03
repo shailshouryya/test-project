@@ -46,11 +46,11 @@ def create_packages(package_levels, start, end, base_path = '.', base_name=''):
             module_suffixes = package_levels[current_level].get('module_suffixes', [])
             module_prefix   = package_levels[current_level].get('module_prefix', '')
             print(f'package_name is {package_name}')
-            create_subpackage(package_path, package_name, module_suffixes, module_prefix)
+            create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix)
             create_packages(package_levels, start+1, end, base_path=package_path, base_name=subpackage_name)
 
 
-def create_subpackage(package_path, package_name, module_suffixes, module_prefix):
+def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix):
     os.makedirs(name=package_path, mode=511, exist_ok=False)
     __init__filepath = os.path.join(package_path, '__init__.py')
     with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as file:
