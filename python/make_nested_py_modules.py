@@ -48,15 +48,15 @@ def create_packages(package_levels, start, end, base_path = '.', base_name=''):
             print(f'package_name is {package_name}')
             os.makedirs(name=package_path, mode=511, exist_ok=False)
             __init__filepath = os.path.join(package_path, '__init__.py')
-            with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as file:
-                file.write('\n')
-            create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix)
-            create_packages(package_levels, start+1, end, base_path=package_path, base_name=subpackage_name)
+            with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as __init__file:
+                create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file)
+                create_packages(package_levels, start+1, end, base_path=package_path, base_name=subpackage_name)
 
 
-def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix):
+def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file):
     for module_suffix in module_suffixes:
         module_name = f'{module_prefix}{module_suffix}'
+        __init__file.write(f'import {module_name}\n')
         module_file_path = os.path.join(package_path, f'{module_name}.py')
         with open(module_file_path, mode='w', encoding='utf-8', buffering=-1) as file:
             file.write(f'''print('{package_name}.{module_name}')\n''')
