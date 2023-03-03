@@ -19,7 +19,7 @@ def main(package_levels=None, start=1, end=2):
                 'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
             },
         }
-    create_packages(package_levels, start, end)
+    create_packages(package_levels, start, end, base_path='.', base_name='')
 
 
 def remove_script_created_contents():
@@ -34,7 +34,7 @@ def remove_directory(directory):
     shutil.rmtree(directory)
 
 
-def create_packages(package_levels, start, end, base_path = '.', base_name=''):
+def create_packages(package_levels, start, end, base_path, base_name):
     if start <= end:
         current_level     = start
         base_name         = base_name + '.' if base_name else ''
