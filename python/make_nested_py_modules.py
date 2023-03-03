@@ -2,9 +2,25 @@ import os
 import shutil
 
 
-def main():
+def main(package_levels=None, start=1, end=2):
     remove_script_created_contents()
-    create_packages(['a', 'b', 'c'], ['a', 'b', 'c', 'd', 'e'])
+    if package_levels is None:
+        package_levels = {
+            1: {
+                'subpackage_prefix': 'package_',
+                'subpackage_suffixes': ['a', 'b', 'c'],
+                'module_prefix': 'module_',
+                'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
+            },
+            2: {
+                'subpackage_prefix': 'subpackage_',
+                'subpackage_suffixes': ['a', 'b', 'c'],
+                'module_prefix': '',
+                'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
+            },
+        }
+    create_packages(package_levels, start, end)
+
 
 def remove_script_created_contents():
     top_level_path, top_level_nested_directories, top_level_files = next(os.walk('.'))
@@ -18,16 +34,18 @@ def remove_directory(directory):
     shutil.rmtree(directory)
 
 
-def create_packages(package_letters, module_letters):
-    for package_letter in package_letters:
-        package_name = f'package_{package_letter}'
-        package_path = os.path.join('.', package_name)
-        print(f'package_name is {package_name}')
-        create_subpackage(package_path, package_name, module_letters, module_prefix='module_')
-        for second_level in package_letters:
-            second_level_name = f'{package_name}.subpackage_{second_level}'
-            second_level_path = os.path.join(package_name, f'subpackage_{second_level}')
-            create_subpackage(second_level_path, second_level_name, module_letters, module_prefix='')
+def create_packages(package_levels, start, end, base_path = '.', base_name=''):
+    if start <= end:
+        current_level     = start
+        base_name         = base_name + '.' if base_name else ''
+        subpackage_prefix = package_levels[current_level].get('subpackage_prefix', '')
+        for subpackage_suffix in package_levels[current_level].get('subpackage_suffixes', []):
+            subpackage_name = subpackage_prefix + subpackage_suffix
+            package_name    = base_name + subpackage_name
+            package_path    = os.path.join(base_path, subpackage_name)
+            print(f'package_name is {package_name}')
+            create_subpackage(package_path, package_name=package_name, module_letters=package_levels[current_level].get('module_suffixes', []), module_prefix=package_levels[current_level].get('module_prefix', ''))
+            create_packages(package_levels, start+1, end, base_path=package_path, base_name=subpackage_name)
 
 
 def create_subpackage(package_path, package_name, module_letters, module_prefix):
