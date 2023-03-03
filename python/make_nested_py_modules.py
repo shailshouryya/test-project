@@ -19,7 +19,7 @@ def main(package_levels=None, start=1, end=2):
                 'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
             },
         }
-    create_packages(package_levels, start, end, base_path='.', base_name='')
+    create_packages(package_levels, start, end, base_path='.', base_name='', __init__files=[])
 
 
 def remove_script_created_contents():
@@ -34,7 +34,7 @@ def remove_directory(directory):
     shutil.rmtree(directory)
 
 
-def create_packages(package_levels, start, end, base_path, base_name):
+def create_packages(package_levels, start, end, base_path, base_name, __init__files=None):
     if start <= end:
         current_level     = start
         base_name         = base_name + '.' if base_name else ''
@@ -43,6 +43,8 @@ def create_packages(package_levels, start, end, base_path, base_name):
             subpackage_name = subpackage_prefix + subpackage_suffix
             package_name    = base_name + subpackage_name
             package_path    = os.path.join(base_path, subpackage_name)
+            for __init__file in __init__files:
+                __init__file.write(f'import {package_name}\n')
             module_suffixes = package_levels[current_level].get('module_suffixes', [])
             module_prefix   = package_levels[current_level].get('module_prefix', '')
             print(f'package_name is {package_name}')
@@ -50,7 +52,11 @@ def create_packages(package_levels, start, end, base_path, base_name):
             __init__filepath = os.path.join(package_path, '__init__.py')
             with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as __init__file:
                 create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file)
-                create_packages(package_levels, start+1, end, base_path=package_path, base_name=subpackage_name)
+                __init__files.append(__init__file)
+                create_packages(package_levels, start+1, end, base_path=package_path, base_name=subpackage_name, __init__files=__init__files)
+                __init__files.pop()
+
+
 
 
 def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file):
