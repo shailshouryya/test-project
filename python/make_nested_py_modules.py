@@ -2,7 +2,7 @@ import os
 import shutil
 
 
-def main(package_levels=None, start=1, end=4):
+def main(package_levels=None, start=1, end=2):
     remove_script_created_contents()
     if package_levels is None:
         package_levels = {
@@ -55,7 +55,6 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
             subpackage_name = subpackage_prefix + subpackage_suffix
             package_name    = base_name + subpackage_name
             package_path    = os.path.join(base_path, subpackage_name)
-            print([file for _, file in __init__files])
             for __init__file, __init__package_path in __init__files:
                 # imports still work with the hard coded path but provide less flexibility
                 # than relative imports
@@ -76,7 +75,6 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
                 relative_subpackage_path_start = len(__init__package_path)
                 normalize_subpackage_path      = package_name[relative_subpackage_path_start:]
                 subpackages                    = normalize_subpackage_path.split('.')
-                print(package_name, subpackages)
                 if len(subpackages) == 2:
                     relative_subpackage_path = '.'
                     relative_subpackage_name = subpackages[1]
