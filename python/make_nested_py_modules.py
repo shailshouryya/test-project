@@ -43,21 +43,23 @@ def create_packages(package_levels, start, end, base_path = '.', base_name=''):
             subpackage_name = subpackage_prefix + subpackage_suffix
             package_name    = base_name + subpackage_name
             package_path    = os.path.join(base_path, subpackage_name)
+            module_suffixes = package_levels[current_level].get('module_suffixes', [])
+            module_prefix   = package_levels[current_level].get('module_prefix', '')
             print(f'package_name is {package_name}')
-            create_subpackage(package_path, package_name=package_name, module_letters=package_levels[current_level].get('module_suffixes', []), module_prefix=package_levels[current_level].get('module_prefix', ''))
+            create_subpackage(package_path, package_name, module_suffixes, module_prefix)
             create_packages(package_levels, start+1, end, base_path=package_path, base_name=subpackage_name)
 
 
-def create_subpackage(package_path, package_name, module_letters, module_prefix):
+def create_subpackage(package_path, package_name, module_suffixes, module_prefix):
     os.makedirs(name=package_path, mode=511, exist_ok=False)
     __init__filepath = os.path.join(package_path, '__init__.py')
     with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as file:
         file.write('\n')
-    for module in module_letters:
-        module_name = f'{module_prefix}{module}'
+    for module_suffix in module_suffixes:
+        module_name = f'{module_prefix}{module_suffix}'
         module_file_path = os.path.join(package_path, f'{module_name}.py')
         with open(module_file_path, mode='w', encoding='utf-8', buffering=-1) as file:
-            file.write(f'''print('{package_name}.{module}')\n''')
+            file.write(f'''print('{package_name}.{module_suffix}')\n''')
             file.write('')
 
 
