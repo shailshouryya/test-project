@@ -1,8 +1,8 @@
-import module_a
-import module_b
-import module_c
-import module_d
-import module_e
+from . import module_a
+from . import module_b
+from . import module_c
+from . import module_d
+from . import module_e
 import package_b.subpackage_a
 import package_b.subpackage_b
 import package_b.subpackage_c

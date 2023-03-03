@@ -62,7 +62,7 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
 def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file):
     for module_suffix in module_suffixes:
         module_name = f'{module_prefix}{module_suffix}'
-        __init__file.write(f'import {module_name}\n')
+        __init__file.write(f'from . import {module_name}\n')
         module_file_path = os.path.join(package_path, f'{module_name}.py')
         with open(module_file_path, mode='w', encoding='utf-8', buffering=-1) as file:
             file.write(f'''print('{package_name}.{module_name}')\n''')
