@@ -59,7 +59,7 @@ def create_subpackage(package_path, package_name, module_suffixes, module_prefix
         module_name = f'{module_prefix}{module_suffix}'
         module_file_path = os.path.join(package_path, f'{module_name}.py')
         with open(module_file_path, mode='w', encoding='utf-8', buffering=-1) as file:
-            file.write(f'''print('{package_name}.{module_suffix}')\n''')
+            file.write(f'''print('{package_name}.{module_name}')\n''')
             file.write('')
 
 

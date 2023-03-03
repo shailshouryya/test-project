@@ -1,1 +1,1 @@
-print('package_a.d')
+print('package_a.module_d')
