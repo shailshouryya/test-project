@@ -71,7 +71,7 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
             with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as __init__file:
                 create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file)
                 __init__files.append((__init__file, package_name))
-                create_packages(package_levels, start+1, end, base_path=package_path, base_name=subpackage_name, __init__files=__init__files)
+                create_packages(package_levels, start+1, end, base_path=package_path, base_name=package_name, __init__files=__init__files)
                 __init__files.pop()
 
 
