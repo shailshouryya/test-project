@@ -2,7 +2,7 @@ import os
 import shutil
 
 
-def main(package_levels=None, start=1, end=2):
+def main(package_levels=None, start=1, end=4):
     remove_script_created_contents()
     if package_levels is None:
         package_levels = {
@@ -13,6 +13,18 @@ def main(package_levels=None, start=1, end=2):
                 'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
             },
             2: {
+                'subpackage_prefix': 'subpackage_',
+                'subpackage_suffixes': ['a', 'b', 'c'],
+                'module_prefix': '',
+                'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
+            },
+            3: {
+                'subpackage_prefix': 'subpackage_',
+                'subpackage_suffixes': ['a', 'b', 'c'],
+                'module_prefix': '',
+                'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
+            },
+            4: {
                 'subpackage_prefix': 'subpackage_',
                 'subpackage_suffixes': ['a', 'b', 'c'],
                 'module_prefix': '',
@@ -43,7 +55,8 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
             subpackage_name = subpackage_prefix + subpackage_suffix
             package_name    = base_name + subpackage_name
             package_path    = os.path.join(base_path, subpackage_name)
-            for __init__file, __init__package in __init__files:
+            print([file for _, file in __init__files])
+            for __init__file, __init__package_path in __init__files:
                 # imports still work with the hard coded path but provide less flexibility
                 # than relative imports
                 #     renaming a base package would require renaming the
@@ -60,9 +73,17 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
                 #         for example, renaming `package_name` to `new_package_name` would require no change to
                 #         `from . import subpackage.module`
                 #         in the package_name.to.__init__.py module (new_package_name.to.__init__ module after the rename)
-                already_in_relative_path = __init__package + '.'
-                relative_subpackage_name = package_name.lstrip(already_in_relative_path)
-                __init__file.write(f'from . import {relative_subpackage_name}\n')
+                relative_subpackage_path_start = len(__init__package_path)
+                normalize_subpackage_path      = package_name[relative_subpackage_path_start:]
+                subpackages                    = normalize_subpackage_path.split('.')
+                print(package_name, subpackages)
+                if len(subpackages) == 2:
+                    relative_subpackage_path = '.'
+                    relative_subpackage_name = subpackages[1]
+                else:
+                    relative_subpackage_path = '.'.join(subpackages[:-1])
+                    relative_subpackage_name = subpackages[-1]
+                __init__file.write(f'from {relative_subpackage_path} import {relative_subpackage_name}\n')
             module_suffixes = package_levels[current_level].get('module_suffixes', [])
             module_prefix   = package_levels[current_level].get('module_prefix', '')
             print(f'package_name is {package_name}')
