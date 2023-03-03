@@ -43,8 +43,26 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
             subpackage_name = subpackage_prefix + subpackage_suffix
             package_name    = base_name + subpackage_name
             package_path    = os.path.join(base_path, subpackage_name)
-            for __init__file in __init__files:
-                __init__file.write(f'import {package_name}\n')
+            for __init__file, __init__package in __init__files:
+                # imports still work with the hard coded path but provide less flexibility
+                # than relative imports
+                #     renaming a base package would require renaming the
+                #     subpackage `import` statement in the `__init__` module when
+                #     the import is a hard coded import
+                #         for example, renaming `package_name` to `new_package_name` would require changing
+                #         `import package_name.to.subpackage.module`
+                #         to
+                #         `import new_package_name.to.subpackage.module`
+                #         in the package_name.to.__init__.py module (new_package_name.to.__init__ module after the rename)
+                #     renaming a base package would NOT require renaming the
+                #     subpackage `import` statement in the `__init__` module when
+                #     the import is a relative import
+                #         for example, renaming `package_name` to `new_package_name` would require no change to
+                #         `from . import subpackage.module`
+                #         in the package_name.to.__init__.py module (new_package_name.to.__init__ module after the rename)
+                already_in_relative_path = __init__package + '.'
+                relative_subpackage_name = package_name.lstrip(already_in_relative_path)
+                __init__file.write(f'from . import {relative_subpackage_name}\n')
             module_suffixes = package_levels[current_level].get('module_suffixes', [])
             module_prefix   = package_levels[current_level].get('module_prefix', '')
             print(f'package_name is {package_name}')
@@ -52,7 +70,7 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
             __init__filepath = os.path.join(package_path, '__init__.py')
             with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as __init__file:
                 create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file)
-                __init__files.append(__init__file)
+                __init__files.append((__init__file, package_name))
                 create_packages(package_levels, start+1, end, base_path=package_path, base_name=subpackage_name, __init__files=__init__files)
                 __init__files.pop()
 
