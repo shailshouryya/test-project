@@ -60,9 +60,9 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
                 relative_subpackage_path, relative_subpackage_name = determine_relative_subpackage_info(package_name, __init__package_path)
                 __init__file.write(f'from {relative_subpackage_path} import {relative_subpackage_name}\n')
             __init__filepath = os.path.join(package_path, '__init__.py')
-            with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as __init__file:
-                create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file)
-                __init__files.append((__init__file, package_name))
+            with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as subpackage__init__file:
+                create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, subpackage__init__file)
+                __init__files.append((subpackage__init__file, package_name))
                 create_packages(package_levels, start+1, end, base_path=package_path, base_name=package_name, __init__files=__init__files)
                 __init__files.pop()
 
@@ -114,10 +114,10 @@ def create_subpackage(package_path, mode=511, exist_ok=False):
     os.makedirs(name=package_path, mode=mode, exist_ok=exist_ok)
 
 
-def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file):
+def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, subpackage__init__file):
     for module_suffix in module_suffixes:
         module_name = f'{module_prefix}{module_suffix}'
-        __init__file.write(f'from . import {module_name}\n')
+        subpackage__init__file.write(f'from . import {module_name}\n')
         module_file_path = os.path.join(package_path, f'{module_name}.py')
         with open(module_file_path, mode='w', encoding='utf-8', buffering=-1) as file:
             file.write(f'''print('{package_name}.{module_name}')\n''')
