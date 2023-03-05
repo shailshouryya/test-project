@@ -59,8 +59,8 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
             for __init__file, __init__package_path in __init__files:
                 relative_subpackage_path, relative_subpackage_name = determine_relative_subpackage_info(package_name, __init__package_path)
                 __init__file.write(f'from {relative_subpackage_path} import {relative_subpackage_name}\n')
-            __init__filepath = os.path.join(package_path, '__init__.py')
-            with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as subpackage__init__file:
+            subpackage__init__filepath = os.path.join(package_path, '__init__.py')
+            with open(subpackage__init__filepath, mode='w', encoding='utf-8', buffering=-1) as subpackage__init__file:
                 create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, subpackage__init__file)
                 __init__files.append((subpackage__init__file, package_name))
                 create_packages(package_levels, start+1, end, base_path=package_path, base_name=package_name, __init__files=__init__files)
