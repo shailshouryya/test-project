@@ -53,13 +53,12 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
         current_package   = package_levels.get(current_level, {})
         subpackage_prefix = current_package.get('subpackage_prefix', f'level_{current_level}_')
         for subpackage_suffix in current_package.get('subpackage_suffixes', ['_package']):
-            package_name, package_path = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
+            package_name, package_path      = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
+            module_prefix , module_suffixes = determine_module_info(current_package)
+            os.makedirs(name=package_path, mode=511, exist_ok=False)
             for __init__file, __init__package_path in __init__files:
                 relative_subpackage_path, relative_subpackage_name = determine_relative_subpackage_info(package_name, __init__package_path)
                 __init__file.write(f'from {relative_subpackage_path} import {relative_subpackage_name}\n')
-            module_prefix , module_suffixes = determine_module_info(current_package)
-            print(f'package_name is {package_name}')
-            os.makedirs(name=package_path, mode=511, exist_ok=False)
             __init__filepath = os.path.join(package_path, '__init__.py')
             with open(__init__filepath, mode='w', encoding='utf-8', buffering=-1) as __init__file:
                 create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file)
@@ -72,6 +71,7 @@ def determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, b
     subpackage_name      = subpackage_prefix + subpackage_suffix
     full_subpackage_name = base_name + subpackage_name
     full_subpackage_path = os.path.join(base_path, subpackage_name)
+    print(f'package_name is {full_subpackage_name}')
     return full_subpackage_name, full_subpackage_path
 
 
