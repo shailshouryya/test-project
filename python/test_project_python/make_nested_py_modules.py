@@ -55,7 +55,7 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
         for subpackage_suffix in current_package.get('subpackage_suffixes', ['_package']):
             package_name, package_path      = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
             module_prefix , module_suffixes = determine_module_info(current_package)
-            os.makedirs(name=package_path, mode=511, exist_ok=False)
+            create_subpackage(package_path)
             for __init__file, __init__package_path in __init__files:
                 relative_subpackage_path, relative_subpackage_name = determine_relative_subpackage_info(package_name, __init__package_path)
                 __init__file.write(f'from {relative_subpackage_path} import {relative_subpackage_name}\n')
@@ -108,6 +108,10 @@ def determine_relative_subpackage_info(package_name, __init__package_path):
         relative_subpackage_path = '.'.join(subpackages[:-1])
         relative_subpackage_name = subpackages[-1]
     return relative_subpackage_path, relative_subpackage_name
+
+
+def create_subpackage(package_path, mode=511, exist_ok=False):
+    os.makedirs(name=package_path, mode=mode, exist_ok=exist_ok)
 
 
 def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file):
