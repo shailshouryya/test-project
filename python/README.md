@@ -133,6 +133,7 @@ Also note that running python files as modules locally creates a `__pycache__` d
 │       └── test_project_python
 │           ├── __init__.py
 │           └── __main__.py
+│           └── make_nested_py_modules.py
 ├── dist
 │   ├── test-project-python-0.0.1.tar.gz
 │   └── test_project-python-0.0.1-py3-none-any.whl
@@ -225,6 +226,7 @@ Also note that running python files as modules locally creates a `__pycache__` d
 └── test_project_python
 │   ├── __init__.py
 │   ├── __main__.py
+│   ├── make_nested_py_modules.py
 └── test_project_python.egg-info
     ├── PKG-INFO
     ├── SOURCES.txt
