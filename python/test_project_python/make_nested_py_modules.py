@@ -56,31 +56,7 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
             package_name    = base_name + subpackage_name
             package_path    = os.path.join(base_path, subpackage_name)
             for __init__file, __init__package_path in __init__files:
-                # imports still work with the hard coded path but provide less flexibility
-                # than relative imports
-                #     renaming a base package would require renaming the
-                #     subpackage `import` statement in the `__init__` module when
-                #     the import is a hard coded import
-                #         for example, renaming `package_name` to `new_package_name` would require changing
-                #         `import package_name.to.subpackage.module`
-                #         to
-                #         `import new_package_name.to.subpackage.module`
-                #         in the package_name.to.__init__.py module (new_package_name.to.__init__ module after the rename)
-                #     renaming a base package would NOT require renaming the
-                #     subpackage `import` statement in the `__init__` module when
-                #     the import is a relative import
-                #         for example, renaming `package_name` to `new_package_name` would require no change to
-                #         `from . import subpackage.module`
-                #         in the package_name.to.__init__.py module (new_package_name.to.__init__ module after the rename)
-                relative_subpackage_path_start = len(__init__package_path)
-                normalize_subpackage_path      = package_name[relative_subpackage_path_start:]
-                subpackages                    = normalize_subpackage_path.split('.')
-                if len(subpackages) == 2:
-                    relative_subpackage_path = '.'
-                    relative_subpackage_name = subpackages[1]
-                else:
-                    relative_subpackage_path = '.'.join(subpackages[:-1])
-                    relative_subpackage_name = subpackages[-1]
+                relative_subpackage_path, relative_subpackage_name = determine_relative_subpackage_info(package_name, __init__package_path)
                 __init__file.write(f'from {relative_subpackage_path} import {relative_subpackage_name}\n')
             module_suffixes = package_levels[current_level].get('module_suffixes', [])
             module_prefix   = package_levels[current_level].get('module_prefix', '')
@@ -94,6 +70,33 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
                 __init__files.pop()
 
 
+def determine_relative_subpackage_info(package_name, __init__package_path):
+    # imports still work with the hard coded path but provide less flexibility
+    # than relative imports
+    #     renaming a base package would require renaming the
+    #     subpackage `import` statement in the `__init__` module when
+    #     the import is a hard coded import
+    #         for example, renaming `package_name` to `new_package_name` would require changing
+    #         `import package_name.to.subpackage.module`
+    #         to
+    #         `import new_package_name.to.subpackage.module`
+    #         in the package_name.to.__init__.py module (new_package_name.to.__init__ module after the rename)
+    #     renaming a base package would NOT require renaming the
+    #     subpackage `import` statement in the `__init__` module when
+    #     the import is a relative import
+    #         for example, renaming `package_name` to `new_package_name` would require no change to
+    #         `from . import subpackage.module`
+    #         in the package_name.to.__init__.py module (new_package_name.to.__init__ module after the rename)
+    relative_subpackage_path_start = len(__init__package_path)
+    normalize_subpackage_path      = package_name[relative_subpackage_path_start:]
+    subpackages                    = normalize_subpackage_path.split('.')
+    if len(subpackages) == 2:
+        relative_subpackage_path = '.'
+        relative_subpackage_name = subpackages[1]
+    else:
+        relative_subpackage_path = '.'.join(subpackages[:-1])
+        relative_subpackage_name = subpackages[-1]
+    return relative_subpackage_path, relative_subpackage_name
 
 
 def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefix, __init__file):
