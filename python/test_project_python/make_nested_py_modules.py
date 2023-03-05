@@ -46,7 +46,7 @@ def remove_directory(directory):
     shutil.rmtree(directory)
 
 
-def create_packages(package_levels, start, end, base_path, base_name, __init__files=None):
+def create_packages(package_levels, start, end, base_path, base_name, __init__files):
     if start <= end:
         current_level     = start
         base_name         = base_name + '.' if base_name else ''
