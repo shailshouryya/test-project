@@ -53,9 +53,7 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
         current_package   = package_levels.get(current_level, {})
         subpackage_prefix = current_package.get('subpackage_prefix', f'level_{current_level}_')
         for subpackage_suffix in current_package.get('subpackage_suffixes', ['_package']):
-            subpackage_name = subpackage_prefix + subpackage_suffix
-            package_name    = base_name + subpackage_name
-            package_path    = os.path.join(base_path, subpackage_name)
+            package_name, package_path = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
             for __init__file, __init__package_path in __init__files:
                 relative_subpackage_path, relative_subpackage_name = determine_relative_subpackage_info(package_name, __init__package_path)
                 __init__file.write(f'from {relative_subpackage_path} import {relative_subpackage_name}\n')
@@ -69,6 +67,13 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
                 __init__files.append((__init__file, package_name))
                 create_packages(package_levels, start+1, end, base_path=package_path, base_name=package_name, __init__files=__init__files)
                 __init__files.pop()
+
+
+def determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name):
+    subpackage_name      = subpackage_prefix + subpackage_suffix
+    full_subpackage_name = base_name + subpackage_name
+    full_subpackage_path = os.path.join(base_path, subpackage_name)
+    return full_subpackage_name, full_subpackage_path
 
 
 def determine_relative_subpackage_info(package_name, __init__package_path):
