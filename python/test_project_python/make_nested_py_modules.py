@@ -51,7 +51,7 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
         current_level     = start
         base_name         = base_name + '.' if base_name else ''
         current_package   = package_levels.get(current_level, {})
-        subpackage_prefix = current_package.get('subpackage_prefix', '')
+        subpackage_prefix = current_package.get('subpackage_prefix', f'level_{current_level}_')
         for subpackage_suffix in current_package.get('subpackage_suffixes', []):
             subpackage_name = subpackage_prefix + subpackage_suffix
             package_name    = base_name + subpackage_name
