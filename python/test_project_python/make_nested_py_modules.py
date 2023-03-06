@@ -54,7 +54,7 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
         subpackage_prefix = current_package.get('subpackage_prefix', f'level_{current_level}_')
         for subpackage_suffix in current_package.get('subpackage_suffixes', ['_package']):
             package_name, package_path      = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
-            module_prefix , module_suffixes = determine_module_info(current_package)
+            module_prefix , module_suffixes = determine_module_info_for_subpackage(current_package)
             create_subpackage(package_path)
             for __init__file, __init__package_path in __init__files:
                 relative_subpackage_path, relative_subpackage_name = determine_relative_subpackage_info(package_name, __init__package_path)
@@ -75,7 +75,7 @@ def determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, b
     return full_subpackage_name, full_subpackage_path
 
 
-def determine_module_info(current_package):
+def determine_module_info_for_subpackage(current_package):
     module_suffixes = current_package.get('module_suffixes', ['_name'])
     module_prefix   = current_package.get('module_prefix', 'module_')
     return module_prefix , module_suffixes
