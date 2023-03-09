@@ -2,8 +2,9 @@ import os
 import shutil
 
 
-def main(package_levels=None, start=1, end=2):
-    remove_script_created_contents()
+def main(package_levels=None, start=1, end=2, directory_removal_prefixes=None):
+    if directory_removal_prefixes is None: directory_removal_prefixes = ['package_']
+    remove_script_created_contents(directory_removal_prefixes)
     if package_levels is None:
         package_levels = {
             1: {
@@ -34,11 +35,11 @@ def main(package_levels=None, start=1, end=2):
     create_packages(package_levels, start, end, base_path='.', base_name='', __init__files=[])
 
 
-def remove_script_created_contents():
+def remove_script_created_contents(directory_removal_prefixes):
     top_level_path, top_level_nested_directories, top_level_files = next(os.walk('.'))
     # print(top_level_path, top_level_nested_directories, top_level_files)
     for nested_directory in top_level_nested_directories:
-        if nested_directory.startswith('package_'):
+        if any(nested_directory.startswith(prefix) for prefix in directory_removal_prefixes):
             remove_directory(nested_directory)
 
 
