@@ -23,15 +23,15 @@ This project contains a dummy python project to
 ## Project Structure
 
 Note that some of the files below are configuration/build/binary files auto-generated after running commands to set up the package locally, and are NOT included in the repo:
-- the `python3 setup.py sdist` commands creates
+- the `python setup.py sdist` commands creates
   - `dist/test-project-python-0.0.1.tar.gz`
   - `test_project_python.egg-info` (and nested contents)
-- the `python3 setup.py bdist_wheel` command creates
+- the `python setup.py bdist_wheel` command creates
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
   - `dist/test_project_python-0.0.1-py3-none-any.whl`
   - `build/lib/`(and nested contents)
   - `test_project_python.egg-info` (and nested contents)
-- the `pip3 install .` command creates
+- the `python -m pip install .` command creates
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
   - `build/lib/`(and nested contents)
   - `test_project_python.egg-info` (and nested contents)
