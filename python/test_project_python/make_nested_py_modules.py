@@ -36,6 +36,19 @@ def main(package_levels=None, start=1, end=2, directory_removal_prefixes=None):
     create_packages(package_levels, start, end, base_path='.', base_name='', __init__files=[])
 
 
+def validate_instance_is_from_class(obj, acceptable_types, variable_name):
+    if isinstance(acceptable_types, tuple): formatted_acceptable_types = f'one of the following types: {acceptable_types}' # multiple acceptable types
+    else:                                   formatted_acceptable_types = f'an instance of {acceptable_types}'              # one      acceptable type
+    variable_reference = f'variable `{variable_name}`'
+    error_message = f'''
+    Invalid value provided for {variable_reference}
+      You provided {obj} (type {type(obj)}) for {variable_reference}, but
+      {variable_reference} needs to be {formatted_acceptable_types}
+    '''
+    if not isinstance(obj, acceptable_types):
+        raise TypeError(error_message)
+
+
 def remove_script_created_contents(directory_removal_prefixes):
     top_level_path, top_level_nested_directories, top_level_files = next(os.walk('.'))
     # print(top_level_path, top_level_nested_directories, top_level_files)
