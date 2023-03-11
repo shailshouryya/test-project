@@ -11,7 +11,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name                          = 'test-project-python',
-    version                       = '0.0.1',
+    version                       = '0.0.2',
     description                   = 'Test project to see how packaging works on PyPI.',
     long_description              = long_description,
     long_description_content_type = 'text/markdown',

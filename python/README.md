@@ -24,11 +24,11 @@ This project contains a dummy python project to
 
 Note that some of the files below are configuration/build/binary files auto-generated after running commands to set up the package locally, and are NOT included in the repo:
 - the `python setup.py sdist` commands creates
-  - `dist/test-project-python-0.0.1.tar.gz`
+  - `dist/test-project-python-0.0.2.tar.gz`
   - `test_project_python.egg-info` (and nested contents)
 - the `python setup.py bdist_wheel` command creates
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
-  - `dist/test_project_python-0.0.1-py3-none-any.whl`
+  - `dist/test_project_python-0.0.2-py3-none-any.whl`
   - `build/lib/`(and nested contents)
   - `test_project_python.egg-info` (and nested contents)
 - the `python -m pip install .` command creates
@@ -138,8 +138,8 @@ Also note that running python files as modules locally creates a `__pycache__` d
 │           └── __main__.py
 │           └── make_nested_py_modules.py
 ├── dist
-│   ├── test-project-python-0.0.1.tar.gz
-│   └── test_project-python-0.0.1-py3-none-any.whl
+│   ├── test-project-python-0.0.2.tar.gz
+│   └── test_project-python-0.0.2-py3-none-any.whl
 ├── make_nested_py_modules.sh
 ├── package_a
 │   ├── __init__.py
@@ -307,4 +307,4 @@ twine upload dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_n
 
 ## Releases
 
-See the [latest release](https://github.com/shailshouryya/test-project/releases/tag/0.0.1-python) from the [releases page](https://github.com/shailshouryya/test-project/releases)
+See the [latest release](https://github.com/shailshouryya/test-project/releases/tag/0.0.2-python) from the [releases page](https://github.com/shailshouryya/test-project/releases)
