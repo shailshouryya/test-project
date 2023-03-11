@@ -261,6 +261,49 @@ command_name
 command_name_for_function_in__main__
 ```
 
+## Building a python package for distribution
+
+```
+# update the package version to the new MAJOR.MINOR.PATCH everywhere in the project
+
+
+# run the following commands from the root of your python project (and make sure your setup.py module is here)
+#
+# in the test_project_python project, this is from the
+# /path/to/test-project/python directory (the setup.py module is here)
+
+
+# https://stackoverflow.com/questions/34928001/distutils-ignores-changes-to-setup-py-when-building-an-extension
+python setup.py clean --all                           # avoid using cached information
+rm -r build/                                          # python setup.py clean --all **should** remove all contents of build/, but just in case
+rm -r project_name.egg-info                           # **should** be updated automatically with both the setup.py and pip install command below, but just in case
+rm -r package_* example_*                             # remove script generated packages (test_project_python specific, another projects will have a different cleaning process)
+python -m test_project_python.make_nested_py_modules  # build script generated packages (test_project_python specific, another projects will have a different build process)
+python setup.py sdist bdist_wheel                     # build packages for distribution
+python -m pip install .                               # install the package locally
+# run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
+
+
+# sign the package with your gpg key (optional)
+# NOTE that your command may be `gpg2` instead of `gpg` (depends on how you installed this)
+# also NOTE that the dashes or underscores in the dist/projectname.tar.gz is dependent on how
+#      you named things in your setup.py module; specifically dependent on the `name` argument
+#      you provide to the setuptools.setup function (if you use underscores for the `name` value, the
+#          file will be dist/project_name.tar.gz, whereas if you use dashes for the `name` value, the
+#          file will be dist/project-name.tar.gz)
+gpg --detach-sign -a dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl
+gpg --detach-sign -a dist/project-name-MAJOR.MINOR.PATCH.tar.gz
+
+
+### upload to PyPI ###
+# upload to https://test.pypi.org/
+twine upload --repository-url https://test.pypi.org/legacy/ dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl.asc dist/project-name-MAJOR.MINOR.PATCH.tar.gz dist/project-name-MAJOR.MINOR.PATCH.tar.gz.asc
+
+# upload to https://pypi.org/
+twine upload dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl.asc dist/project-name-MAJOR.MINOR.PATCH.tar.gz dist/project-name-MAJOR.MINOR.PATCH.tar.gz.asc
+
+```
+
 
 ## Releases
 
