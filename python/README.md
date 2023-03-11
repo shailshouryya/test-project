@@ -1,5 +1,8 @@
 # test_project_python
 
+NOTE: substitute the alias you set for `python` on your local machine for any commands below that call `python`. Common aliases include `python`, `python3`, `py3`, `python3.x`, or `py3.x` (where `x` corresponds to the python minor release version of your installation).
+
+
 This project contains a dummy python project to
 - test how packaging works for python
   - using the `setuptools`  module
@@ -238,7 +241,6 @@ Also note that running python files as modules locally creates a `__pycache__` d
 
 ## Examples
 
-NOTE: substitute the alias for `python` you set for your local machine. Common aliases include `python`, `python3`, `py3`, `python3.x`, or `py3.x` (where `x` corresponds to the python minor release version of your installation).
 ```
 ### install/upgrade the test_project_python package ###
 python -m pip install --upgrade test_project_python
