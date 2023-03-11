@@ -236,6 +236,30 @@ Also note that running python files as modules locally creates a `__pycache__` d
     └── top_level.txt
 ```
 
+## Examples
+
+NOTE: substitute the alias for `python` you set for your local machine. Common aliases include `python`, `python3`, `py3`, `python3.x`, or `py3.x` (where `x` corresponds to the python minor release version of your installation).
+```
+### install/upgrade the test_project_python package ###
+python -m pip install --upgrade test_project_python
+
+
+
+### run modules defined in the test_project_python package ###
+python -m test_project_python.make_nested_py_modules
+# now take a look at the directories and modules created by this command
+
+python -m test_project_python.make_nested_py_modules_examples
+# now take a look at the directories and modules created by this command
+
+
+
+### run commands defined in entry_points['console_scripts'] located in the setup.py module ###
+command_name
+command_name_for_function_in__main__
+```
+
+
 ## Releases
 
 See the [latest release](https://github.com/shailshouryya/test-project/releases/tag/0.0.1-python) from the [releases page](https://github.com/shailshouryya/test-project/releases)
