@@ -1,3 +1,4 @@
+import itertools
 import os
 import shutil
 
@@ -8,25 +9,25 @@ def main(package_levels=None, start=1, end=2, directory_removal_prefixes=None):
     if package_levels is None:
         package_levels = {
             1: {
-                'subpackage_prefix': 'package_',
+                'subpackage_prefixes': ['package_'],
                 'subpackage_suffixes': ['a', 'b', 'c'],
                 'module_prefix': 'module_',
                 'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
             },
             2: {
-                'subpackage_prefix': 'subpackage_',
+                'subpackage_prefixes': ['subpackage_'],
                 'subpackage_suffixes': ['a', 'b', 'c'],
                 'module_prefix': '',
                 'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
             },
             3: {
-                'subpackage_prefix': 'subpackage_',
+                'subpackage_prefixes': ['subpackage_'],
                 'subpackage_suffixes': ['a', 'b', 'c'],
                 'module_prefix': '',
                 'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
             },
             4: {
-                'subpackage_prefix': 'subpackage_',
+                'subpackage_prefixes': ['subpackage_'],
                 'subpackage_suffixes': ['a', 'b', 'c'],
                 'module_prefix': '',
                 'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
@@ -52,9 +53,9 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
         current_level     = start
         base_name         = base_name + '.' if base_name else ''
         current_package   = package_levels.get(current_level, {})
-        subpackage_prefix = current_package.get('subpackage_prefix', f'level_{current_level}_')
+        current_subpackage_prefixes = current_package.get('subpackage_prefixes', [f'level_{current_level}_'])
         current_subpackage_suffixes = current_package.get('subpackage_suffixes', ['_package'])
-        for subpackage_suffix in current_subpackage_suffixes:
+        for subpackage_prefix, subpackage_suffix in itertools.product(current_subpackage_prefixes, current_subpackage_suffixes):
             package_name, package_path      = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
             module_prefix , module_suffixes = determine_module_info_for_subpackage(current_package)
             create_subpackage(package_path)
