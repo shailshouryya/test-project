@@ -53,7 +53,8 @@ def create_packages(package_levels, start, end, base_path, base_name, __init__fi
         base_name         = base_name + '.' if base_name else ''
         current_package   = package_levels.get(current_level, {})
         subpackage_prefix = current_package.get('subpackage_prefix', f'level_{current_level}_')
-        for subpackage_suffix in current_package.get('subpackage_suffixes', ['_package']):
+        current_subpackage_suffixes = current_package.get('subpackage_suffixes', ['_package'])
+        for subpackage_suffix in current_subpackage_suffixes:
             package_name, package_path      = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
             module_prefix , module_suffixes = determine_module_info_for_subpackage(current_package)
             create_subpackage(package_path)
