@@ -24,17 +24,21 @@ This project contains a dummy python project to
 
 Note that some of the files below are configuration/build/binary files auto-generated after running commands to set up the package locally, and are NOT included in the repo:
 - the `python setup.py sdist` commands creates
-  - `dist/test-project-python-0.0.2.tar.gz`
+  - `dist/test-project-python-0.0.2.post0.tar.gz`
   - `test_project_python.egg-info` (and nested contents)
 - the `python setup.py bdist_wheel` command creates
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
-  - `dist/test_project_python-0.0.2-py3-none-any.whl`
+  - `dist/test_project_python-0.0.2.post0-py3-none-any.whl`
   - `build/lib/`(and nested contents)
   - `test_project_python.egg-info` (and nested contents)
 - the `python -m pip install .` command creates
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
   - `build/lib/`(and nested contents)
   - `test_project_python.egg-info` (and nested contents)
+- the `gpg --detach-sign -a dist/test-project-python-0.0.2.post0.tar.gz` command creates
+  - `dist/test-project-python-0.0.2.post0.tar.gz.asc`
+- the `gpg --detach-sign -a dist/test_project_python-0.0.2.post0-py3-none-any.whl` command creates
+  - `dist/test_project_python-0.0.2.post0-py3-none-any.whl.asc`
 
 Also note that running python files as modules locally creates a `__pycache__` directory and `.pyc` file nested inside the `__pycache__` directory (which were manually excluded from the structure below) for that corresponding module!
 - note that this
@@ -137,9 +141,12 @@ Also note that running python files as modules locally creates a `__pycache__` d
 │           ├── __init__.py
 │           └── __main__.py
 │           └── make_nested_py_modules.py
+│           └── make_nested_py_modules_examples.py
 ├── dist
-│   ├── test-project-python-0.0.2.tar.gz
-│   └── test_project-python-0.0.2-py3-none-any.whl
+│   ├── test-project-python-0.0.2.post0.tar.gz
+│   ├── test-project-python-0.0.2.post0.tar.gz.asc
+│   └── test_project_python-0.0.2.post0-py3-none-any.whl
+│   └── test_project_python-0.0.2.post0-py3-none-any.whl.asc
 ├── make_nested_py_modules.sh
 ├── package_a
 │   ├── __init__.py
@@ -229,8 +236,8 @@ Also note that running python files as modules locally creates a `__pycache__` d
 └── test_project_python
 │   ├── __init__.py
 │   ├── __main__.py
-│   ├── make_nested_py_modules_examples.py
 │   ├── make_nested_py_modules.py
+│   ├── make_nested_py_modules_examples.py
 └── test_project_python.egg-info
     ├── PKG-INFO
     ├── SOURCES.txt
@@ -307,4 +314,4 @@ twine upload dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_n
 
 ## Releases
 
-See the [latest release](https://github.com/shailshouryya/test-project/releases/tag/0.0.2-python) from the [releases page](https://github.com/shailshouryya/test-project/releases)
+See the [latest release](https://github.com/shailshouryya/test-project/releases/tag/0.0.2.post0-python) from the [releases page](https://github.com/shailshouryya/test-project/releases)
