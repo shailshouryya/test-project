@@ -268,6 +268,62 @@ command_name
 command_name_for_function_in__main__
 ```
 
+
+## Version tag rules for a python package for distribution
+
+The version tag (specified in the `version` argument to the `setuptools.setup` function in `setup.py`) must follow the rules outlined in [PEP 440 – Version Identification and Dependency Specification](https://peps.python.org/pep-0440/). Not doing so will result in an error such as the following (the following snippet used the `version` value of `0.0.2.update1` in the `setuptools.setup` function in `setup.py`):
+
+```
+$ twine upload --repository-url https://test.pypi.org/legacy/ dist/test_project_python-0.0.2.update1-py3-none-any.whl dist/test-project-python-0.0.2.update1.tar.gz dist/test-project-python-0.0.2.update1.tar.gz.asc dist/test_project_python-0.0.2.update1-py3-none-any.whl.asc
+Uploading distributions to https://test.pypi.org/legacy/
+Enter your username: username
+Enter your password:
+Uploading test_project_python-0.0.2.update1-py3-none-any.whl
+100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.2/49.2 kB • 00:00 • X.Y MB/s
+WARNING  Error during upload. Retry with the --verbose option for more details.
+ERROR    HTTPError: 400 Bad Request from https://test.pypi.org/legacy/
+         '0.0.2.update1' is an invalid value for Version. Error: Start and end with a letter or numeral containing only ASCII numeric and '.', '_' and '-'. See https://packaging.python.org/specifications/core-metadata for more
+         information.
+
+### with the --verbose flag ###
+$ twine upload --repository-url https://test.pypi.org/legacy/ dist/test_project_python-0.0.2.update1-py3-none-any.whl dist/test-project-python-0.0.2.update1.tar.gz dist/test-project-python-0.0.2.update1.tar.gz.asc dist/test_project_python-0.0.2.update1-py3-none-any.whl.asc --verbose
+Uploading distributions to https://test.pypi.org/legacy/
+INFO     dist/test_project_python-0.0.2.update1-py3-none-any.whl (22.1 KB)
+INFO     Signed with dist/test_project_python-0.0.2.update1-py3-none-any.whl.asc
+INFO     dist/test-project-python-0.0.2.update1.tar.gz (15.2 KB)
+INFO     Signed with dist/test-project-python-0.0.2.update1.tar.gz.asc
+INFO     Querying keyring for username
+Enter your username: username
+INFO     Querying keyring for password
+Enter your password:
+INFO     username: username
+INFO     password: <hidden>
+Uploading test_project_python-0.0.2.update1-py3-none-any.whl
+100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.2/49.2 kB • 00:00 • X.Y MB/s
+INFO     Response from https://test.pypi.org/legacy/:
+         400 '0.0.2.update1' is an invalid value for Version. Error: Start and end with a letter or numeral containing only ASCII numeric and '.', '_' and '-'. See https://packaging.python.org/specifications/core-metadata for more
+         information.
+INFO     <html>
+          <head>
+           <title>400 '0.0.2.update1' is an invalid value for Version. Error: Start and end with a letter or numeral containing only ASCII numeric and '.', '_' and '-'. See https://packaging.python.org/specifications/core-metadata for
+         more information.</title>
+          </head>
+          <body>
+           <h1>400 '0.0.2.update1' is an invalid value for Version. Error: Start and end with a letter or numeral containing only ASCII numeric and '.', '_' and '-'. See https://packaging.python.org/specifications/core-metadata for more
+         information.</h1>
+           The server could not comply with the request since it is either malformed or otherwise incorrect.<br/><br/>
+         &#x27;0.0.2.update1&#x27; is an invalid value for Version. Error: Start and end with a letter or numeral containing only ASCII numeric and &#x27;.&#x27;, &#x27;_&#x27; and &#x27;-&#x27;. See
+         https://packaging.python.org/specifications/core-metadata for more information.
+
+
+          </body>
+         </html>
+ERROR    HTTPError: 400 Bad Request from https://test.pypi.org/legacy/
+         '0.0.2.update1' is an invalid value for Version. Error: Start and end with a letter or numeral containing only ASCII numeric and '.', '_' and '-'. See https://packaging.python.org/specifications/core-metadata for more
+         information.
+```
+
+
 ## Building a python package for distribution
 
 ```
