@@ -346,6 +346,17 @@ python setup.py sdist bdist_wheel                     # build packages for distr
 python -m pip install .                               # install the package locally
 # run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 
+:: Windows equivalent commands
+:: NOTE: :: (double colons) is the Windows syntax for writing comments in CMD
+python setup.py clean --all
+rmdir /S /Q build/
+rmdir /S /Q project_name.egg-info
+for /d %G in ("package_*", "example_*") do rmdir /S /Q "%~dpnG"
+python -m test_project_python.make_nested_py_modules
+python setup.py sdist bdist_wheel
+python -m pip install .
+:: run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
+
 
 # sign the package with your gpg key (optional)
 # NOTE that your command may be `gpg2` instead of `gpg` (depends on how you installed this)
