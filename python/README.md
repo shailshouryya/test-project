@@ -358,6 +358,36 @@ python -m pip install .
 :: run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 
 
+<#
+PowerShell is very flexible and has multiple aliases for common commands, so
+feel free to substitute a different alias if you have one that you prefer.
+For example, you can use any of the aliases shown from the output of
+
+> help Remove-Item
+
+so instead of
+> Remove-Item -recurse -path the_path_to_folder
+
+you can do
+> Remove-Item -recurse the_path_to_folder # equivalent
+> ri    -r the_path_to_folder             # equivalent
+> rm    -r the_path_to_folder             # equivalent
+> rmdir -r the_path_to_folder             # equivalent
+> del   -r the_path_to_folder             # equivalent
+> erase -r the_path_to_folder             # equivalent
+> rd    -r the_path_to_folder             # equivalent
+#>
+python setup.py clean --all
+Remove-Item -recurse -path build/
+Remove-Item -recurse -path project_name.egg-info
+Remove-Item -recurse -path package_*             # notice that Remove-Item does NOT accept multiple
+Remove-Item -recurse -path example_*             # arguments to Remove-Item (or any of its aliases)
+python -m test_project_python.make_nested_py_modules
+python setup.py sdist bdist_wheel
+python -m pip install .
+# run the sequence again (so run the 8 commands sequentially twice) just in case something somehow remains cached
+
+
 # sign the package with your gpg key (optional)
 # NOTE that your command may be `gpg2` instead of `gpg` (depends on how you installed this)
 # also NOTE that the dashes or underscores in the dist/projectname.tar.gz is dependent on how
