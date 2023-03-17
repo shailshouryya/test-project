@@ -20,6 +20,12 @@ This project contains a dummy python project to
     - packaging.python.org landing page: [Python Packaging User Guide](https://packaging.python.org/en/latest/)
       - maintained by [Python Packaging Authority](https://www.pypa.io/en/latest/)
 
+
+## Requirements
+
+This package uses [f-strings](https://cito.github.io/blog/f-strings/) ([learn more about f-strings here](https://realpython.com/python-f-strings/)), so this package requires Python version 3.6+ to run properly.
+
+
 ## Project Structure
 
 Note that some of the files below are configuration/build/binary files auto-generated after running commands to set up the package locally, and are NOT included in the repo:

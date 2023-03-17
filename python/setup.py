@@ -39,12 +39,6 @@ setup(
         'Operating System :: Microsoft :: Windows :: Windows 11',
         'Operating System :: Unix',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.0',
-        'Programming Language :: Python :: 3.1',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
@@ -74,7 +68,7 @@ setup(
     # package_dir={'':'src'},
 
 
-    python_requires  = '>=3.0.*, <4',
+    python_requires  = '>=3.6.*, <4',
     install_requires = [],  # Optional
     # https://packaging.python.org/discussions/install-requires-vs-requirements/
 
