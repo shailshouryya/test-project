@@ -45,7 +45,10 @@ The following requirements are NOT required to run the `test_project_python` pac
 python -m pip install --upgrade pip build twine
 ```
 
-
+The following is NOT a required step in the [Building a python package for distribution](#building-a-python-package-for-distribution) section below, but will enable you to sign your package.
+- https://gnupg.org/download/
+  - download GnuPG, then download Pinentry
+  - follow the instructions for verifying the download and installing the software for your operating system
 
 ## Project Structure
 
