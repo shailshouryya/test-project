@@ -25,6 +25,19 @@ This project contains a dummy python project to
 
 This package uses [f-strings](https://cito.github.io/blog/f-strings/) ([learn more about f-strings here](https://realpython.com/python-f-strings/)), so this package requires Python version 3.6+ to run properly.
 
+If you do not have Python installed, or have an older version of Python, you can download Python 3.11.2 (the latest stable version as UTC 2023-03-18) from one of the links below and follow the instructions to set up Python for your machine. If you want to install a different version, visit the [Python Downloads page](https://www.python.org/downloads/) and select the version you want.
+- [Gzipped source tarball](https://www.python.org/ftp/python/3.11.2/Python-3.11.2.tgz)
+- [XZ compressed source tarball](https://www.python.org/ftp/python/3.11.2/Python-3.11.2.tar.xz)
+- [macOS 64-bit universal2 installer](https://www.python.org/ftp/python/3.11.2/python-3.11.2-macos11.pkg)
+- [Windows embeddable package (32-bit)](https://www.python.org/ftp/python/3.11.2/python-3.11.2-embed-win32.zip)
+- [Windows embeddable package (64-bit)](https://www.python.org/ftp/python/3.11.2/python-3.11.2-embed-amd64.zip)
+- [Windows embeddable package (ARM64)](https://www.python.org/ftp/python/3.11.2/python-3.11.2-embed-arm64.zip)
+- [Windows installer (32-bit)](https://www.python.org/ftp/python/3.11.2/python-3.11.2.exe)
+- [Windows installer (64-bit)](https://www.python.org/ftp/python/3.11.2/python-3.11.2-amd64.exe)
+- [Windows installer (ARM64)](https://www.python.org/ftp/python/3.11.2/python-3.11.2-arm64.exe)
+- [Instructions for downloading Python on other platforms](https://www.python.org/download/other/)
+
+
 
 ## Project Structure
 
