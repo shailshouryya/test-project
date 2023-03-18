@@ -37,6 +37,14 @@ If you do not have Python installed, or have an older version of Python, you can
 - [Windows installer (ARM64)](https://www.python.org/ftp/python/3.11.2/python-3.11.2-arm64.exe)
 - [Instructions for downloading Python on other platforms](https://www.python.org/download/other/)
 
+### Development requirements
+
+The following requirements are NOT required to run the `test_project_python` package locally (after installing with `python -m pip install --upgrade test_project_python`), but ARE required to follow along with the [Building a python package for distribution](#building-a-python-package-for-distribution) section below.
+
+```
+python -m pip install --upgrade pip build twine
+```
+
 
 
 ## Project Structure
