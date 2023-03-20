@@ -64,6 +64,9 @@ The download link below to GnuPG is NOT required for the [Building a python pack
         - [GnuPG for OS X](https://gnupg.org/download/) comes with `gpg` (binary) and Pinentry, but not with GPG Keychain nor GPG Mail
         - [Gpg4win](https://gpg4win.org/download.html) comes with GpgOL, GpgEX, GnuPG, Kleopatra and pinentry-qt (includes both `pinentry.exe` and `pinentry-w32.exe`, not sure which one is run by default)
         - the Simple installer for the current GnuPG for Windows (gnupg-w32-X.Y.Z_yyyymmdd.exe) comes with GnuPg and Pinentry (`pinentry-basic.exe`), but not with GpgOL, GpgEX, nor Kleopatra
+- some potentially useful tutorials
+  - targeted for Windows, but includes platform agnostic information (see the `Option B: Command Line` sections): [Setting Up GPG on Windows (The Easy Way)](https://www.git-tower.com/blog/setting-up-gpg-windows/)
+  - targeted for macOS, but includes platform agnostic concepts about `gpg` and public/private keys ("private key" is also referred to as a "secret key"): [First steps - where do I start, where do I begin? (Setup GPGTools, Create a new key, Your first encrypted email)](https://gpgtools.tenderapp.com/kb/how-to/first-steps-where-do-i-start-where-do-i-begin-setup-gpgtools-create-a-new-key-your-first-encrypted-email)
 
 
 ## Project Structure
