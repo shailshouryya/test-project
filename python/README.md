@@ -45,10 +45,26 @@ The following requirements are NOT required to run the `test_project_python` pac
 python -m pip install --upgrade pip build twine
 ```
 
-The following is NOT a required step in the [Building a python package for distribution](#building-a-python-package-for-distribution) section below, but will enable you to sign your package.
+The download link below to GnuPG is NOT required for the [Building a python package for distribution](#building-a-python-package-for-distribution) section below, but will enable you to sign your package.
 - https://gnupg.org/download/
-  - download GnuPG, then download Pinentry
-  - follow the instructions for verifying the download and installing the software for your operating system
+  - the easiest way to download and install GnuPG is to
+    - navigate to the `GnuPG binary releases` section at https://gnupg.org/download/
+    - select the application for your operating system and follow the download link
+    - follow the instructions for verifying the download and installing the software for your operating system from there
+  - if you want to download GnuPG and install from the source files
+    - navigate to the `Source code releases` section at https://gnupg.org/download/
+    - download GnuPG and install (may need to extract and/or unzip the source files first)
+    - download Pinentry and install (may need to extract and/or unzip the source files first)
+  - keep in mind
+    - the setup process may vary depending on your operating system
+    - the specific applications you get along with your GPG installation may vary depending your operating system and the bundle you select
+      - recent distributions of `debian` come pre-installed with `gpg`
+      - most GnuPG application bundles install a GUI to streamline the process of creating and managing keys
+        - the GPG Suite installed with [Mac GPG](https://gpgtools.org/) comes with `gpg` (binary), GPG Keychain, GPG Mail, and Pinentry
+        - [GnuPG for OS X](https://gnupg.org/download/) comes with `gpg` (binary) and Pinentry, but not with GPG Keychain nor GPG Mail
+        - [Gpg4win](https://gpg4win.org/download.html) comes with GpgOL, GpgEX, GnuPG, Kleopatra and pinentry-qt (includes both `pinentry.exe` and `pinentry-w32.exe`, not sure which one is run by default)
+        - the Simple installer for the current GnuPG for Windows (gnupg-w32-X.Y.Z_yyyymmdd.exe) comes with GnuPg and Pinentry (`pinentry-basic.exe`), but not with GpgOL, GpgEX, nor Kleopatra
+
 
 ## Project Structure
 
