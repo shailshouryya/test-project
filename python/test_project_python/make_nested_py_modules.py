@@ -98,7 +98,7 @@ def create_packages(package_levels: PackageLevelsMap, start: int, end: int, base
                 __init__files.pop()
 
 
-def determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name):
+def determine_subpackage_info(subpackage_prefix: str, subpackage_suffix: str, base_path: str, base_name: str):
     subpackage_name      = subpackage_prefix + subpackage_suffix
     full_subpackage_name = base_name + subpackage_name
     full_subpackage_path = os.path.join(base_path, subpackage_name)
