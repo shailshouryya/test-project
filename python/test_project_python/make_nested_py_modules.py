@@ -73,7 +73,7 @@ def remove_directory(directory: str) -> None:
     shutil.rmtree(directory)
 
 
-def create_packages(package_levels: PackageLevelsMap, start: int, end: int, base_path: str, base_name: str, __init__files: Collection) -> None:
+def create_packages(package_levels: PackageLevelsMap, start: int, end: int, base_path: str, base_name: str, __init__files: Collection[Tuple[str, str]]) -> None:
     if start <= end:
         current_level     = start
         base_name         = base_name + '.' if base_name else ''
