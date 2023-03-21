@@ -1,6 +1,6 @@
 print('Entered test_project_python.__main__ :)')
 
-def function_in__main__():
+def function_in__main__() -> None:
     print('Ran test_project_python.__main__.function_in__main__')
     print('''
     To better understand how commands from the 'console_scripts' key inside
