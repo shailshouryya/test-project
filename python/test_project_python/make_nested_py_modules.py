@@ -114,7 +114,7 @@ def determine_module_info_for_subpackage(current_package: PackageLevelDefinition
     return module_prefixes, module_suffixes
 
 
-def determine_relative_subpackage_info(package_name, __init__package_path):
+def determine_relative_subpackage_info(package_name: str, __init__package_path: str):
     # imports still work with the hard coded path but provide less flexibility
     # than relative imports
     #     renaming a base package would require renaming the
