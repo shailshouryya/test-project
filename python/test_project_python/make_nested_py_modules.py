@@ -60,7 +60,7 @@ def validate_instance_is_from_class(obj: T, acceptable_types: Union[T, Tuple], v
         raise TypeError(error_message)
 
 
-def remove_script_created_contents(directory_removal_prefixes):
+def remove_script_created_contents(directory_removal_prefixes: Collection[str]):
     top_level_path, top_level_nested_directories, top_level_files = next(os.walk('.'))
     # print(top_level_path, top_level_nested_directories, top_level_files)
     for nested_directory in top_level_nested_directories:
