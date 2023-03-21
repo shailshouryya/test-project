@@ -6,8 +6,10 @@ import shutil
 from typing import Optional, Collection, Mapping, TypeVar, Tuple, Union
 
 
-PackageLevelsMap = Mapping[int, Mapping[str, Collection[str]]]
-T                = TypeVar('T')
+PackageLevelDefinition = Mapping[str, Collection[str]]
+PackageLevelsMap       = Mapping[int, PackageLevelDefinition]
+T                      = TypeVar('T')
+
 
 def main(package_levels: Optional[PackageLevelsMap] = None, start: int = 1, end: int = 2, directory_removal_prefixes: Optional[Collection[str]] = None):
     none_type = type(None)
@@ -106,7 +108,7 @@ def determine_subpackage_info(subpackage_prefix: str, subpackage_suffix: str, ba
     return full_subpackage_name, full_subpackage_path
 
 
-def determine_module_info_for_subpackage(current_package):
+def determine_module_info_for_subpackage(current_package: PackageLevelDefinition):
     module_suffixes = current_package.get('module_suffixes', ['_name'])
     module_prefixes = current_package.get('module_prefixes', ['module_'])
     return module_prefixes, module_suffixes
