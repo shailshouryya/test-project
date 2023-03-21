@@ -143,7 +143,7 @@ def determine_relative_subpackage_info(package_name: str, __init__package_path: 
     return relative_subpackage_path, relative_subpackage_name
 
 
-def create_subpackage(package_path, mode=511, exist_ok=False):
+def create_subpackage(package_path: str, mode: int = 511, exist_ok: bool = False):
     os.makedirs(name=package_path, mode=mode, exist_ok=exist_ok)
 
 
