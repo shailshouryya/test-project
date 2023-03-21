@@ -16,7 +16,7 @@ def main(package_levels: Optional[PackageLevelsMap] = None, start: int = 1, end:
     validate_instance_is_from_class(package_levels, (none_type, collections.abc.Mapping), 'package_levels')
     validate_instance_is_from_class(start, int, 'start')
     validate_instance_is_from_class(end,   int, 'end')
-    validate_instance_is_from_class(directory_removal_prefixes, (none_type, collections.abc.Sequence), 'directory_removal_prefixes')
+    validate_instance_is_from_class(directory_removal_prefixes, (none_type, collections.abc.Collection), 'directory_removal_prefixes')
     if directory_removal_prefixes is None: directory_removal_prefixes = ['package_']
     remove_script_created_contents(directory_removal_prefixes)
     if package_levels is None:
@@ -81,13 +81,13 @@ def create_packages(package_levels: PackageLevelsMap, start: int, end: int, base
         current_package   = package_levels.get(current_level, {})
         current_subpackage_prefixes = current_package.get('subpackage_prefixes', [f'level_{current_level}_'])
         current_subpackage_suffixes = current_package.get('subpackage_suffixes', ['_package'])
-        validate_instance_is_from_class(current_subpackage_prefixes, collections.abc.Sequence, f'''package_levels[{current_level}]['subpackage_prefixes']''')
-        validate_instance_is_from_class(current_subpackage_suffixes, collections.abc.Sequence, f'''package_levels[{current_level}]['subpackage_suffixes']''')
+        validate_instance_is_from_class(current_subpackage_prefixes, collections.abc.Collection, f'''package_levels[{current_level}]['subpackage_prefixes']''')
+        validate_instance_is_from_class(current_subpackage_suffixes, collections.abc.Collection, f'''package_levels[{current_level}]['subpackage_suffixes']''')
         for subpackage_prefix, subpackage_suffix in itertools.product(current_subpackage_prefixes, current_subpackage_suffixes):
             package_name, package_path      = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
             module_prefixes , module_suffixes = determine_module_info_for_subpackage(current_package)
-            validate_instance_is_from_class(module_prefixes, collections.abc.Sequence, f'''package_levels[{current_level}]['module_prefixes']''')
-            validate_instance_is_from_class(module_suffixes, collections.abc.Sequence, f'''package_levels[{current_level}]['module_suffixes']''')
+            validate_instance_is_from_class(module_prefixes, collections.abc.Collection, f'''package_levels[{current_level}]['module_prefixes']''')
+            validate_instance_is_from_class(module_suffixes, collections.abc.Collection, f'''package_levels[{current_level}]['module_suffixes']''')
             create_subpackage(package_path)
             for __init__file, __init__package_path in __init__files:
                 relative_subpackage_path, relative_subpackage_name = determine_relative_subpackage_info(package_name, __init__package_path)
