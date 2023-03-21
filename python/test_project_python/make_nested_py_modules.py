@@ -68,7 +68,7 @@ def remove_script_created_contents(directory_removal_prefixes: Collection[str]):
             remove_directory(nested_directory)
 
 
-def remove_directory(directory):
+def remove_directory(directory: str):
     shutil.rmtree(directory)
 
 
