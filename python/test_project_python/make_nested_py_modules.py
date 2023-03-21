@@ -3,10 +3,11 @@ import itertools
 import os
 import shutil
 
-from typing import Optional, Collection, Mapping
+from typing import Optional, Collection, Mapping, TypeVar, Tuple, Union
 
 
 PackageLevelsMap = Mapping[int, Mapping[str, Collection[str]]]
+T                = TypeVar('T')
 
 def main(package_levels: Optional[PackageLevelsMap] = None, start: int = 1, end: int = 2, directory_removal_prefixes: Optional[Collection[str]] = None):
     none_type = type(None)
@@ -46,7 +47,7 @@ def main(package_levels: Optional[PackageLevelsMap] = None, start: int = 1, end:
     create_packages(package_levels, start, end, base_path='.', base_name='', __init__files=[])
 
 
-def validate_instance_is_from_class(obj, acceptable_types, variable_name):
+def validate_instance_is_from_class(obj: T, acceptable_types: Union[T, Tuple], variable_name: str):
     if isinstance(acceptable_types, tuple): formatted_acceptable_types = f'one of the following types: {acceptable_types}' # multiple acceptable types
     else:                                   formatted_acceptable_types = f'an instance of {acceptable_types}'              # one      acceptable type
     variable_reference = f'variable `{variable_name}`'
