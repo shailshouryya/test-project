@@ -3,7 +3,7 @@ import itertools
 import os
 import shutil
 
-from typing import Optional, Collection, Mapping, TypeVar, Tuple, Union
+from typing import Optional, Collection, Mapping, TextIO, TypeVar, Tuple, Union
 
 
 PackageLevelDefinition = Mapping[str, Collection[str]]
@@ -147,7 +147,7 @@ def create_subpackage(package_path: str, mode: int = 511, exist_ok: bool = False
     os.makedirs(name=package_path, mode=mode, exist_ok=exist_ok)
 
 
-def create_modules_for_subpackage(package_path, package_name, module_suffixes, module_prefixes, subpackage__init__file):
+def create_modules_for_subpackage(package_path: str, package_name: str, module_suffixes: Collection[str], module_prefixes: Collection[str], subpackage__init__file: TextIO):
     for module_prefix, module_suffix in itertools.product(module_prefixes, module_suffixes):
         module_name = f'{module_prefix}{module_suffix}'
         subpackage__init__file.write(f'from . import {module_name}\n')
