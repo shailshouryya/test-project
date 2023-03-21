@@ -3,8 +3,12 @@ import itertools
 import os
 import shutil
 
+from typing import Optional, Collection, Mapping
 
-def main(package_levels=None, start=1, end=2, directory_removal_prefixes=None):
+
+PackageLevelsMap = Mapping[int, Mapping[str, Collection[str]]]
+
+def main(package_levels: Optional[PackageLevelsMap] = None, start: int = 1, end: int = 2, directory_removal_prefixes: Optional[Collection[str]] = None):
     none_type = type(None)
     validate_instance_is_from_class(package_levels, (none_type, collections.abc.Mapping), 'package_levels')
     validate_instance_is_from_class(start, int, 'start')
