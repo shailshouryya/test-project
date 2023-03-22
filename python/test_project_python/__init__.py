@@ -1,4 +1,4 @@
-__version__ = '0.0.2.post6'
+__version__ = '0.0.2.post7'
 
 print('Entered test_project_python.__init__ :)')
 
