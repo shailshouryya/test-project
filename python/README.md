@@ -52,13 +52,19 @@ The download link below to GnuPG is NOT required for the [Building a python pack
 ## Project Structure
 
 Note that some of the files below are configuration/build/binary files auto-generated after running commands to set up the package locally, and are NOT included in the repo:
-- the `python setup.py sdist` commands creates
+- the ([no longer recommended](https://blog.ganssle.io/tag/setuptools.html#summary)) `python setup.py sdist` commands creates
   - `dist/test-project-python-0.0.2.post6.tar.gz`
   - `test_project_python.egg-info` (and nested contents)
-- the `python setup.py bdist_wheel` command creates
+  - use `python -m build` or `python -m build --no-isolation` command instead to use the [latest](https://packaging.python.org/en/latest/key_projects/#build) [build tools](https://packaging.python.org/en/latest/key_projects/#project-summaries)
+- the ([no longer recommended](https://blog.ganssle.io/tag/setuptools.html#summary)) `python setup.py bdist_wheel` command creates
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
   - `dist/test_project_python-0.0.2.post6-py3-none-any.whl`
   - `build/lib/`(and nested contents)
+  - `test_project_python.egg-info` (and nested contents)
+  - use `python -m build` or `python -m build --no-isolation` command instead to use the [latest](https://packaging.python.org/en/latest/key_projects/#build) [build tools](https://packaging.python.org/en/latest/key_projects/#project-summaries)
+- the [`python -m build` command](https://packaging.python.org/en/latest/tutorials/packaging-projects/#generating-distribution-archives) creates
+  - `dist/test-project-python-0.0.2.post6.tar.gz`
+  - `dist/test_project_python-0.0.2.post6-py3-none-any.whl`
   - `test_project_python.egg-info` (and nested contents)
 - the `python -m pip install .` command creates
   - `build/bdist.OPERATINGSYSTEMNAME-moreoperatingsysteminfo`
@@ -371,7 +377,7 @@ rm -r build/                                          # python setup.py clean --
 rm -r project_name.egg-info                           # **should** be updated automatically with both the setup.py and pip install command below, but just in case
 rm -r package_* example_*                             # remove script generated packages (test_project_python specific, another projects will have a different cleaning process)
 python -m test_project_python.make_nested_py_modules  # build script generated packages (test_project_python specific, another projects will have a different build process)
-python setup.py sdist bdist_wheel                     # build packages for distribution
+python -m build                                       # build packages for distribution (add --no-isolation to avoid virtual environment requirement)
 python -m pip install .                               # install the package locally
 # run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 
@@ -382,7 +388,7 @@ rmdir /S /Q build/
 rmdir /S /Q project_name.egg-info
 for /d %G in ("package_*", "example_*") do rmdir /S /Q "%~dpnG"
 python -m test_project_python.make_nested_py_modules
-python setup.py sdist bdist_wheel
+python -m build                                                 :: add --no-isolation to avoid virtual environment requirement
 python -m pip install .
 :: run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 
@@ -412,7 +418,7 @@ Remove-Item -recurse -path project_name.egg-info
 Remove-Item -recurse -path package_*             # notice that Remove-Item does NOT accept multiple
 Remove-Item -recurse -path example_*             # arguments to Remove-Item (or any of its aliases)
 python -m test_project_python.make_nested_py_modules
-python setup.py sdist bdist_wheel
+python -m build                                  # add --no-isolation to avoid virtual environment requirement
 python -m pip install .
 # run the sequence again (so run the 8 commands sequentially twice) just in case something somehow remains cached
 
