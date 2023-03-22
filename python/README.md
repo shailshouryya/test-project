@@ -437,6 +437,13 @@ twine upload dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_n
 
 ```
 
+Uploading a package to a Python packaging index using a tool such as [`twine`](https://twine.readthedocs.io/en/stable/) requires having an account on the corresponding index. In other words, to upload to
+- the [Test PyPI](https://test.pypi.org) index, you need to [make an account there](https://test.pypi.org/account/register/) if you do not already have one
+- the [PyPI](https://pypi.org) index, you need to [make an account there](https://pypi.org/account/register/) if you do not already have one
+- a private index, you need to have an account with the hosting organization and sufficient privileges to publish packages
+  - the exact details will vary, so ask the index maintainers/administrators what is required for the process of uploading and maintaining Python packages on your private index
+- a self-hosted index such as [pypiserver](https://github.com/pypiserver/pypiserver/blob/master/README.rst), you need to follow whatever steps the person/organization maintaining the hosted service has established 🙂
+
 To see some suggested best practices associated with distributing Python packages on PyPI, read [Sharing Your Labor of Love: PyPI Quick and Dirty](https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/) by [Hynek Schlawack](https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/). This article has lots of useful advice, and indicates invoking `python setup.py sdist` and `python setup.py sdist bdist_wheel` is no longer recommended (see the linked [Why you shouldn't invoke setup.py directly](https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html) article for more information). Instead, you should use [`python -m build`](https://pypa-build.readthedocs.io/en/stable/index.html).
 
 
