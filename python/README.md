@@ -437,6 +437,8 @@ twine upload dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_n
 
 ```
 
+To see some suggested best practices associated with distributing Python packages on PyPI, read [Sharing Your Labor of Love: PyPI Quick and Dirty](https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/) by [Hynek Schlawack](https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/). This article has lots of useful advice, and indicates invoking `python setup.py sdist` and `python setup.py sdist bdist_wheel` is no longer recommended (see the linked [Why you shouldn't invoke setup.py directly](https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html) article for more information). Instead, you should use [`python -m build`](https://pypa-build.readthedocs.io/en/stable/index.html).
+
 
 ## Releases
 
