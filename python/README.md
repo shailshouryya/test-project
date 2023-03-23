@@ -359,6 +359,8 @@ ERROR    HTTPError: 400 Bad Request from https://test.pypi.org/legacy/
 ```
 
 NOTE that Python's versioning rules outlined in [PEP 440](https://peps.python.org/pep-0440/) are different and impose more restrictions than both `git` and GitHub do.
+- `git` enforces no restrictions on naming conventions for tags
+  - `git` sorts tags in alphabetical order
 
 
 ## Building a python package for distribution
