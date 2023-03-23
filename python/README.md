@@ -361,6 +361,45 @@ ERROR    HTTPError: 400 Bad Request from https://test.pypi.org/legacy/
 NOTE that Python's versioning rules outlined in [PEP 440](https://peps.python.org/pep-0440/) are different and impose more restrictions than both `git` and GitHub do.
 - for more details about versioning rules and guidelines for `git` and GitHub, see the [Version tag rules section](../README.md#version-tag-rules) under the [General Guidelines section](../README.md#general-guidelines) in the [main README in the GitHub repository](../README.md)
 
+Also note that Python build tools (such as `setuptools` and `build`) normalize valid semantic version tags to follow a `#.#.#.suffix#` format, so you'll see a message such as the following when building your package with a command like `python -m build` or `python -m build --no-isolation` if your tag **does follow valid semantic versioning** rules, but does not follow the `#.#.#.suffix#` format (NOTE that this does not apply if your tag format is only `#.#.#` and does not have a suffix):
+
+```
+# valid semantic version tag and no normalization required:
+# version='0.0.2-post-8' in `setup` function in setup.py  # no UserWarning message
+
+
+
+# all of the following tags use a valid semantic version tag, but require normalization:
+
+# uses a . (dot) or _ (underscore) after the #.#.# part
+UserWarning: Normalizing '0.0.2-post-8' to '0.0.2.post8'  # version='0.0.2-post-8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2.post-8' to '0.0.2.post8'  # version='0.0.2.post-8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2-post.8' to '0.0.2.post8'  # version='0.0.2-post.8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2_post_8' to '0.0.2.post8'  # version='0.0.2_post_8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2.post_8' to '0.0.2.post8'  # version='0.0.2.post_8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2_post.8' to '0.0.2.post8'  # version='0.0.2_post.8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2_post-8' to '0.0.2.post8'  # version='0.0.2_post-8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2-post_8' to '0.0.2.post8'  # version='0.0.2-post_8' in `setup` function in setup.py
+
+# no . (dot) after the #.#.# part:
+UserWarning: Normalizing '0.0.2post-8' to '0.0.2.post8'   # version='0.0.2post-8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2post-8' to '0.0.2.post8'   # version='0.0.2post-8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2post.8' to '0.0.2.post8'   # version='0.0.2post.8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2post_8' to '0.0.2.post8'   # version='0.0.2post_8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2post_8' to '0.0.2.post8'   # version='0.0.2post_8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2post.8' to '0.0.2.post8'   # version='0.0.2post.8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2post-8' to '0.0.2.post8'   # version='0.0.2post-8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2post_8' to '0.0.2.post8'   # version='0.0.2post_8' in `setup` function in setup.py
+UserWarning: Normalizing '0.0.2post.8' to '0.0.2.post8'   # version='0.0.2post.8' in `setup` function in setup.py
+
+# no . (dot) before the suffix:
+UserWarning: Normalizing '0.0.2post8' to '0.0.2.post8'    # version='0.0.2post8'   in `setup` function in setup.py
+
+# . (dot) after the suffix:
+UserWarning: Normalizing '0.0.2.post.8' to '0.0.2.post8'  # version='0.0.2.post.8' in `setup` function in setup.py
+```
+
+
 ## Building a python package for distribution
 
 ```
