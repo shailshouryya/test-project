@@ -361,6 +361,30 @@ ERROR    HTTPError: 400 Bad Request from https://test.pypi.org/legacy/
 NOTE that Python's versioning rules outlined in [PEP 440](https://peps.python.org/pep-0440/) are different and impose more restrictions than both `git` and GitHub do.
 - `git` enforces no restrictions on naming conventions for tags
   - `git` sorts tags in alphabetical order
+- GitHub enforces no restrictions on naming conventions for tags either (and uses `git` under the hood), but is more nuanced with the tag sorting
+  - it appears the releases page (github.com/yourusername/yourreponame/releases) and the tags page (github.com/yourusername/yourreponame/tags) sort the releases and tags, respectively,
+    - in reverse chronological order [with the tag/commit date as the sort key, not the release date as the sort key](https://github.com/Shadowsocks-NET/QvStaticBuild/releases#discussioncomment-1728546) (so a tag/commit with a more recent date will appear before a tag/commit with an older date), **but when there is a tie** (multiple tags/commits have the same date), GitHub uses
+      - semantic versioning as the tiebreaker when the tag uses a **valid** semantic versioning tag (starts with a digit or a lowercase `v` and follows the `MAJOR.MINOR.PATCH` format, where `MAJOR`, `MINOR`, and `PATCH` are decimal values between 0-9) with **only the first 3 numeric parts of the tag** ordered using semantic version ordering, and **the remaining part of the tag sorted in reverse alphabetical order**
+        - NOTE that the reverse chronological order **uses the date** and **does not use the datetime** of the tag/commit (so 2 tags from the same date with different release times will still be tied)
+        - NOTE that if there are multiple tags that use a valid semver tag **and** are released on the same date **and** have the same value for the first three numeric fields `MAJOR.MINOR.PATCH`, the sorting **will use reverse alphabetical order** using the rest of the tag/release name as the sort key and **not use the rules specified in number 10 under the "Semantic Versioning Specification (SemVer)" section** on the [Semantic Versioning 2.0.0](https://semver.org/) document
+        - NOTE that an uppercase `v`, such as `V1.2.3`, does not qualify as a valid semantic versioning tag by this definition
+      - reverse alphabetical order as the tiebreaker (so `tag-d` will appear before `tag-c`) when the tag uses an **invalid** semantic versioning tag (starts with anything **other than** a digit or a lowercase `v`)
+  - example sort order (same order on both the [Tags page](https://github.com/shailshouryya/test-project/tags) and [Releases page](https://github.com/shailshouryya/test-project/releases):
+```
+# these are correctly sorted in reverse chronological order
+0.0.2.post7-python
+0.0.2.post6-python
+0.0.2.post5-python
+0.0.0.post0
+0.0.0
+0.0.2.post4-python
+0.0.2.post3-python
+0.0.2_post_2-python
+0.0.2-post-1-python
+0.0.2.post0-python
+0.0.2-python
+0.0.1-python
+```
 
 
 ## Building a python package for distribution
