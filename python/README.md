@@ -394,6 +394,21 @@ NOTE that Python's versioning rules outlined in [PEP 440](https://peps.python.or
           - [for `v4.10.0-alpha.3.10.geb2e56af` and `v4.10.0-alpha.3.9.ge0d22139`, semver only cares about the first 3 numeric parts (`v4.10.0`), and then everything after the `-` is not parsed and only sorted (reverse) alphabetically, so `3.10` appears below `3.9` because `1` comes before `9`.](https://github.com/Shadowsocks-NET/QvStaticBuild/releases#discussioncomment-4694630)
           - NOTE that if [the version starts with an upper case `V` (instead of a lower case `v`), the sorting falls back to string sorting. The version is only parsed as semver if the first character of the version is exactly the lower case `v`.]
 
+- the `Compare` buttons on the [Releases page](https://github.com/shailshouryya/test-project/releases) seem to follow some entirely different order, with no obvious pattern:
+```
+# these are sorted in NEITHER reverse chronological order NOR reverse alphabetical order
+0.0.2.post5-python
+0.0.2.post4-python
+0.0.2.post3-python
+0.0.2_post_2-python   # this should be first if sorted reverse alphabetically
+0.0.2.post0-python
+0.0.2-python
+0.0.2-post-1-python   # order after 0.0.2-python makes sense if reverse alphabetical order, but there are other inconsistencies for the reverse alphabetical sort (see comment above and below)
+0.0.1-python
+0.0.0                 # this should be LAST if sorted reverse alphabetically
+0.0.0.post0
+```
+
 
 ## Building a python package for distribution
 
