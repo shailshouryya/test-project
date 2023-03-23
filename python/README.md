@@ -385,6 +385,14 @@ NOTE that Python's versioning rules outlined in [PEP 440](https://peps.python.or
 0.0.2-python
 0.0.1-python
 ```
+  - see the following references for more information:
+    - GitHub REST API docs indicate the latest release on the releases page (github.com/yourusername/yourreponame/releases) uses the [the most recent non-prerelease, non-draft release, sorted by the created_at attribute. The created_at attribute is the date of the commit used for the release, and not the date when the release was drafted or published.](https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-the-latest-release)
+      - however, the SORTING of ALL the releases is more nuanced: GitHub currently uses [a mix of](https://github.com/Shadowsocks-NET/QvStaticBuild/releases#discussioncomment-4697709)) [Semver 2.0.0](https://semver.org/spec/v2.0.0.html) and [pep440](https://peps.python.org/pep-0440/)
+      - seems to order tags in reverse chronological order ([with the tag/commit date as the sort key, not the release date as the sort key](https://github.com/Shadowsocks-NET/QvStaticBuild/releases#discussioncomment-1728546)), and when there is a tie (multiple releases on the same date), GitHub uses semantic versioning as the tiebreaker
+        - [when the tag does not use semantic versioning (does not start with 'v' or a number)](https://github.com/community/community/discussions/8226#discussioncomment-1853768), uses [reverse alphabetical order](https://github.com/community/community/discussions/8226#discussioncomment-1982190) (so 'tag0' would come AFTER 'tag1' if both releases have the same date for their corresponding tag/commit linked to the release)
+        - when the tag does use semantic versioning, only the first 3 numeric parts of a tag are used for the semantic version ordering, and then everything after is not parsed, and is sorted (reverse) alphabetically
+          - [for `v4.10.0-alpha.3.10.geb2e56af` and `v4.10.0-alpha.3.9.ge0d22139`, semver only cares about the first 3 numeric parts (`v4.10.0`), and then everything after the `-` is not parsed and only sorted (reverse) alphabetically, so `3.10` appears below `3.9` because `1` comes before `9`.](https://github.com/Shadowsocks-NET/QvStaticBuild/releases#discussioncomment-4694630)
+          - NOTE that if [the version starts with an upper case `V` (instead of a lower case `v`), the sorting falls back to string sorting. The version is only parsed as semver if the first character of the version is exactly the lower case `v`.]
 
 
 ## Building a python package for distribution
