@@ -358,6 +358,8 @@ ERROR    HTTPError: 400 Bad Request from https://test.pypi.org/legacy/
          information.
 ```
 
+NOTE that Python's versioning rules outlined in [PEP 440](https://peps.python.org/pep-0440/) are different and impose more restrictions than both `git` and GitHub do.
+
 
 ## Building a python package for distribution
 
