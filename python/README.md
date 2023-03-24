@@ -509,6 +509,16 @@ gpg --detach-sign -a dist/project-name-MAJOR.MINOR.PATCH.tar.gz
 
 ### Uploading the package to the hosting index
 
+Uploading a package to a Python packaging index using a tool such as [`twine`](https://twine.readthedocs.io/en/stable/) requires having an account on the corresponding index. In other words, to upload to
+
+- the [Test PyPI](https://test.pypi.org) index, you need to [make an account there](https://test.pypi.org/account/register/) if you do not already have one
+- the [PyPI](https://pypi.org) index, you need to [make an account there](https://pypi.org/account/register/) if you do not already have one
+- a private index, you need to have an account with the hosting organization and sufficient privileges to publish packages
+  - the exact details will vary, so ask the index maintainers/administrators what is required for the process of uploading and maintaining Python packages on your private index
+- a self-hosted index such as [pypiserver](https://github.com/pypiserver/pypiserver/blob/master/README.rst), you need to follow whatever steps the person/organization maintaining the hosted service has established 🙂
+
+Also NOTE that if you want to upload **all** packages to an index, you can specify `dist/*` instead of individually listing each package you want to upload as the examples do below. Keep in mind that you cannot overwrite already existing versions of a package on Test PyPI and PyPI (which is **probably** true for a private index and self-hosted index as well).
+
 
 #### Uploading the new package to https://test.pypi.org/
 
@@ -524,17 +534,6 @@ twine upload --repository-url https://test.pypi.org/legacy/ dist/project_name-MA
 ```text
 twine upload dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl.asc dist/project-name-MAJOR.MINOR.PATCH.tar.gz dist/project-name-MAJOR.MINOR.PATCH.tar.gz.asc
 ```
-
-NOTE that if you want to upload **all** packages to an index, you can specify `dist/*` instead of individually listing each package you want to upload. Keep in mind that you cannot overwrite already existing versions of a package on Test PyPI and PyPI (which is **probably** true for a private index and self-hosted index as well).
-
-
-Uploading a package to a Python packaging index using a tool such as [`twine`](https://twine.readthedocs.io/en/stable/) requires having an account on the corresponding index. In other words, to upload to
-
-- the [Test PyPI](https://test.pypi.org) index, you need to [make an account there](https://test.pypi.org/account/register/) if you do not already have one
-- the [PyPI](https://pypi.org) index, you need to [make an account there](https://pypi.org/account/register/) if you do not already have one
-- a private index, you need to have an account with the hosting organization and sufficient privileges to publish packages
-  - the exact details will vary, so ask the index maintainers/administrators what is required for the process of uploading and maintaining Python packages on your private index
-- a self-hosted index such as [pypiserver](https://github.com/pypiserver/pypiserver/blob/master/README.rst), you need to follow whatever steps the person/organization maintaining the hosted service has established 🙂
 
 NOTE: Uploading to Test PyPI or PyPI [do not require registering your package](https://packaging.python.org/en/latest/guides/migrating-to-pypi-org/#registering-package-names-metadata) using the `setup.py register` (deprecated) command or [`twine register`](https://twine.readthedocs.io/en/stable/#twine-register), but a private or a self-hosted index (such as [pypiserver](https://github.com/pypiserver/pypiserver/blob/master/README.rst#upload-with-twine)] may require some form of registration. Contact the maintainer/administrator of the index for more information. For historical information, read the [Support for legacy register API](https://github.com/pypi/warehouse/issues/1627) thread.
 
