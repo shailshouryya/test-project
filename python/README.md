@@ -41,7 +41,7 @@ If you do not have Python installed, or have an older version of Python, you can
 
 ## Examples
 
-```
+```text
 ### install/upgrade the test_project_python package ###
 python -m pip install --upgrade test_project_python
 
@@ -97,7 +97,7 @@ Also note that running python files as modules locally creates a `__pycache__` d
 
 (structure taken from the output of the `tree` command run from the `test-project/python` directory)
 
-```
+```text
 .
 ├── README.md
 ├── build
@@ -301,7 +301,7 @@ Also note that running python files as modules locally creates a `__pycache__` d
 
 The following requirements are NOT required to run the `test_project_python` package locally (after installing with `python -m pip install --upgrade test_project_python`), but ARE required to follow along with the [Building a python package for distribution](#building-a-python-package-for-distribution) section below.
 
-```
+```text
 python -m pip install --upgrade pip build twine
 ```
 
@@ -314,7 +314,7 @@ The download link below to GnuPG is NOT required for the [Building a python pack
 
 The version tag (specified in the `version` argument to the `setuptools.setup` function in `setup.py`) must follow the rules outlined in [PEP 440 – Version Identification and Dependency Specification](https://peps.python.org/pep-0440/). Not doing so will result in an error such as the following (the following snippet used the `version` value of `0.0.2.update1` in the `setuptools.setup` function in `setup.py`):
 
-```
+```text
 $ twine upload --repository-url https://test.pypi.org/legacy/ dist/test_project_python-0.0.2.update1-py3-none-any.whl dist/test-project-python-0.0.2.update1.tar.gz dist/test-project-python-0.0.2.update1.tar.gz.asc dist/test_project_python-0.0.2.update1-py3-none-any.whl.asc
 Uploading distributions to https://test.pypi.org/legacy/
 Enter your username: username
@@ -370,7 +370,7 @@ NOTE that Python's versioning rules outlined in [PEP 440](https://peps.python.or
 
 Also note that Python build tools (such as `setuptools` and `build`) normalize valid semantic version tags to follow a `#.#.#.suffix#` format, so you'll see a message such as the following when building your package with a command like `python -m build` or `python -m build --no-isolation` if your tag **does follow valid semantic versioning** rules, but does not follow the `#.#.#.suffix#` format (NOTE that this does not apply if your tag format is only `#.#.#` and does not have a suffix):
 
-```
+```text
 # valid semantic version tag and no normalization required:
 # version='0.0.2-post-8' in `setup` function in setup.py  # no UserWarning message
 
@@ -409,7 +409,7 @@ UserWarning: Normalizing '0.0.2.post.8' to '0.0.2.post8'  # version='0.0.2.post.
 
 ## Building a python package for distribution
 
-```
+```text
 # update the package version to the new MAJOR.MINOR.PATCH everywhere in the project
 
 
@@ -420,7 +420,7 @@ UserWarning: Normalizing '0.0.2.post.8' to '0.0.2.post8'  # version='0.0.2.post.
 # /path/to/test-project/python directory (the setup.py module is here)
 ```
 
-```
+```bash
 # Unix terminals such as bash, sh, zsh, ...
 # https://stackoverflow.com/questions/34928001/distutils-ignores-changes-to-setup-py-when-building-an-extension
 python setup.py clean --all                           # avoid using cached information
@@ -433,7 +433,7 @@ python -m pip install .                               # install the package loca
 # run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 ```
 
-```
+```bat
 :: Windows Command Line (also referred to as CMD, .bat, .cmd, batch script)
 :: NOTE: :: (double colons) is the Windows syntax for writing comments in CMD
 python setup.py clean --all
@@ -446,7 +446,7 @@ python -m pip install .
 :: run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 ```
 
-```
+```powershell
 <#
 PowerShell is very flexible and has multiple aliases for common commands, so
 feel free to substitute a different alias if you have one that you prefer.
@@ -479,7 +479,7 @@ python -m pip install .
 
 The following commands are operating system and shell agnostic, and should not require modification:
 
-```
+```text
 # sign the package with your gpg key (optional)
 # NOTE that your command may be `gpg2` instead of `gpg` (depends on how you installed this)
 # also NOTE that the dashes or underscores in the dist/projectname.tar.gz is dependent on how

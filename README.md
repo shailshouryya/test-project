@@ -45,7 +45,7 @@ This repository contains dummy projects in different programming languages to te
       - reverse alphabetical order as the tiebreaker (so `tag-d` will appear before `tag-c`) when the tag uses an **invalid** semantic versioning tag (starts with anything **other than** a digit or a lowercase `v`)
   - example sort order (same order on both the [Tags page](https://github.com/shailshouryya/test-project/tags) and [Releases page](https://github.com/shailshouryya/test-project/releases):
 
-```
+```text
 # these are correctly sorted in reverse chronological order
 0.0.2.post7-python
 0.0.2.post6-python
@@ -71,7 +71,7 @@ This repository contains dummy projects in different programming languages to te
           - NOTE that if [the version starts with an upper case `V` (instead of a lower case `v`), the sorting falls back to string sorting. The version is only parsed as semver if the first character of the version is exactly the lower case `v`.]
 - the `Compare` buttons on the [Releases page](https://github.com/shailshouryya/test-project/releases) seem to follow some entirely different order, with no obvious pattern:
 
-```
+```text
 # these are sorted in NEITHER reverse chronological order NOR reverse alphabetical order
 0.0.2.post5-python
 0.0.2.post4-python
