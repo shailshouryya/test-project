@@ -95,15 +95,15 @@ def create_packages(
     __init__files:    Collection[Tuple[str, str]],
 ) -> None:
     if start <= end:
-        current_level     = start
-        base_name         = base_name + '.' if base_name else ''
-        current_package   = package_levels.get(current_level, {})
+        current_level               = start
+        base_name                   = base_name + '.' if base_name else ''
+        current_package             = package_levels.get(current_level, {})
         current_subpackage_prefixes = current_package.get('subpackage_prefixes', [f'level_{current_level}_'])
         current_subpackage_suffixes = current_package.get('subpackage_suffixes', ['_package'])
         validate_instance_is_from_class(current_subpackage_prefixes, Collection, f'''package_levels[{current_level}]['subpackage_prefixes']''')
         validate_instance_is_from_class(current_subpackage_suffixes, Collection, f'''package_levels[{current_level}]['subpackage_suffixes']''')
         for subpackage_prefix, subpackage_suffix in itertools.product(current_subpackage_prefixes, current_subpackage_suffixes):
-            package_name, package_path      = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
+            package_name, package_path        = determine_subpackage_info(subpackage_prefix, subpackage_suffix, base_path, base_name)
             module_prefixes , module_suffixes = determine_module_info_for_subpackage(current_package)
             validate_instance_is_from_class(module_prefixes, Collection, f'''package_levels[{current_level}]['module_prefixes']''')
             validate_instance_is_from_class(module_suffixes, Collection, f'''package_levels[{current_level}]['module_suffixes']''')
