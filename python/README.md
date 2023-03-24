@@ -414,11 +414,14 @@ UserWarning: Normalizing '0.0.2.post.8' to '0.0.2.post8'  # version='0.0.2.post.
 
 
 # run the following commands from the root of your python project (and make sure your setup.py module is here)
+# using the commands for the operating system and shell you are using
 #
 # in the test_project_python project, this is from the
 # /path/to/test-project/python directory (the setup.py module is here)
+```
 
-
+```
+# Unix terminals such as bash, sh, zsh, ...
 # https://stackoverflow.com/questions/34928001/distutils-ignores-changes-to-setup-py-when-building-an-extension
 python setup.py clean --all                           # avoid using cached information
 rm -r build/                                          # python setup.py clean --all **should** remove all contents of build/, but just in case
@@ -428,8 +431,10 @@ python -m test_project_python.make_nested_py_modules  # build script generated p
 python -m build                                       # build packages for distribution (add --no-isolation to avoid virtual environment requirement)
 python -m pip install .                               # install the package locally
 # run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
+```
 
-:: Windows equivalent commands
+```
+:: Windows Command Line (also referred to as CMD, .bat, .cmd, batch script)
 :: NOTE: :: (double colons) is the Windows syntax for writing comments in CMD
 python setup.py clean --all
 rmdir /S /Q build/
@@ -439,8 +444,9 @@ python -m test_project_python.make_nested_py_modules
 python -m build                                                 :: add --no-isolation to avoid virtual environment requirement
 python -m pip install .
 :: run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
+```
 
-
+```
 <#
 PowerShell is very flexible and has multiple aliases for common commands, so
 feel free to substitute a different alias if you have one that you prefer.
@@ -469,8 +475,11 @@ python -m test_project_python.make_nested_py_modules
 python -m build                                  # add --no-isolation to avoid virtual environment requirement
 python -m pip install .
 # run the sequence again (so run the 8 commands sequentially twice) just in case something somehow remains cached
+```
 
+The following commands are operating system and shell agnostic, and should not require modification:
 
+```
 # sign the package with your gpg key (optional)
 # NOTE that your command may be `gpg2` instead of `gpg` (depends on how you installed this)
 # also NOTE that the dashes or underscores in the dist/projectname.tar.gz is dependent on how
@@ -488,7 +497,6 @@ twine upload --repository-url https://test.pypi.org/legacy/ dist/project_name-MA
 
 # upload to https://pypi.org/
 twine upload dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl.asc dist/project-name-MAJOR.MINOR.PATCH.tar.gz dist/project-name-MAJOR.MINOR.PATCH.tar.gz.asc
-
 ```
 
 Uploading a package to a Python packaging index using a tool such as [`twine`](https://twine.readthedocs.io/en/stable/) requires having an account on the corresponding index. In other words, to upload to
