@@ -14,7 +14,7 @@ def main(
     package_levels:                Optional[PackageLevelsMap]    = None,
     start:                         int                           = 1,
     end:                           int                           = 2,
-    directory_removal_prefixes:    Optional[Collection[str]]     = None
+    directory_removal_prefixes:    Optional[Collection[str]]     = None,
 ) -> None:
     none_type = type(None)
     validate_instance_is_from_class(package_levels, (none_type, Mapping), 'package_levels')
@@ -56,7 +56,7 @@ def main(
 def validate_instance_is_from_class(
     obj:                 Any,
     acceptable_types:    Union[T, Tuple],
-    variable_name:       str
+    variable_name:       str,
 ) -> Union[bool, TypeError]:
     if isinstance(acceptable_types, tuple): formatted_acceptable_types = f'one of the following types: {acceptable_types}' # multiple acceptable types
     else:                                   formatted_acceptable_types = f'an instance of {acceptable_types}'              # one      acceptable type
@@ -71,7 +71,7 @@ def validate_instance_is_from_class(
 
 
 def remove_script_created_contents(
-    directory_removal_prefixes:    Collection[str]
+    directory_removal_prefixes:    Collection[str],
 ) -> None:
     top_level_path, top_level_nested_directories, top_level_files = next(os.walk('.'))
     # print(top_level_path, top_level_nested_directories, top_level_files)
@@ -81,7 +81,7 @@ def remove_script_created_contents(
 
 
 def remove_directory(
-    directory:    str
+    directory:    str,
 ) -> None:
     shutil.rmtree(directory)
 
@@ -92,7 +92,7 @@ def create_packages(
     end:              int,
     base_path:        str,
     base_name:        str,
-    __init__files:    Collection[Tuple[str, str]]
+    __init__files:    Collection[Tuple[str, str]],
 ) -> None:
     if start <= end:
         current_level     = start
@@ -123,7 +123,7 @@ def determine_subpackage_info(
     subpackage_prefix:    str,
     subpackage_suffix:    str,
     base_path:            str,
-    base_name:            str
+    base_name:            str,
 ) -> Tuple[str, str]:
     subpackage_name      = subpackage_prefix + subpackage_suffix
     full_subpackage_name = base_name + subpackage_name
@@ -133,7 +133,7 @@ def determine_subpackage_info(
 
 
 def determine_module_info_for_subpackage(
-    current_package:    PackageLevelDefinition
+    current_package:    PackageLevelDefinition,
 ) -> Tuple[str, str]:
     module_suffixes = current_package.get('module_suffixes', ['_name'])
     module_prefixes = current_package.get('module_prefixes', ['module_'])
@@ -142,7 +142,7 @@ def determine_module_info_for_subpackage(
 
 def determine_relative_subpackage_info(
     package_name:           str,
-    __init__package_path:   str
+    __init__package_path:   str,
 ) -> Tuple[str, str]:
     # imports still work with the hard coded path but provide less flexibility
     # than relative imports
@@ -175,7 +175,7 @@ def determine_relative_subpackage_info(
 def create_subpackage(
     package_path:    str,
     mode:            int     = 511,
-    exist_ok:        bool    = False
+    exist_ok:        bool    = False,
 ) -> None:
     os.makedirs(name=package_path, mode=mode, exist_ok=exist_ok)
 
@@ -185,7 +185,7 @@ def create_modules_for_subpackage(
     package_name:              str,
     module_suffixes:           Collection[str],
     module_prefixes:           Collection[str],
-    subpackage__init__file:    TextIO
+    subpackage__init__file:    TextIO,
 ) -> None:
     for module_prefix, module_suffix in itertools.product(module_prefixes, module_suffixes):
         module_name = f'{module_prefix}{module_suffix}'
