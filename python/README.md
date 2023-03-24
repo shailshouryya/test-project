@@ -39,6 +39,28 @@ If you do not have Python installed, or have an older version of Python, you can
 - [Instructions for downloading Python on other platforms](https://www.python.org/download/other/)
 
 
+## Examples
+
+```
+### install/upgrade the test_project_python package ###
+python -m pip install --upgrade test_project_python
+
+
+
+### run modules defined in the test_project_python package ###
+python -m test_project_python.make_nested_py_modules
+# now take a look at the directories and modules created by this command
+
+python -m test_project_python.make_nested_py_modules_examples
+# now take a look at the directories and modules created by this command
+
+
+
+### run commands defined in entry_points['console_scripts'] located in the setup.py module ###
+command_name
+command_name_for_function_in__main__
+```
+
 ### Development requirements
 
 The following requirements are NOT required to run the `test_project_python` package locally (after installing with `python -m pip install --upgrade test_project_python`), but ARE required to follow along with the [Building a python package for distribution](#building-a-python-package-for-distribution) section below.
@@ -284,29 +306,6 @@ Also note that running python files as modules locally creates a `__pycache__` d
     ├── dependency_links.txt
     ├── entry_points.txt
     └── top_level.txt
-```
-
-
-## Examples
-
-```
-### install/upgrade the test_project_python package ###
-python -m pip install --upgrade test_project_python
-
-
-
-### run modules defined in the test_project_python package ###
-python -m test_project_python.make_nested_py_modules
-# now take a look at the directories and modules created by this command
-
-python -m test_project_python.make_nested_py_modules_examples
-# now take a look at the directories and modules created by this command
-
-
-
-### run commands defined in entry_points['console_scripts'] located in the setup.py module ###
-command_name
-command_name_for_function_in__main__
 ```
 
 
