@@ -38,6 +38,7 @@ If you do not have Python installed, or have an older version of Python, you can
 - [Windows installer (ARM64)](https://www.python.org/ftp/python/3.11.2/python-3.11.2-arm64.exe)
 - [Instructions for downloading Python on other platforms](https://www.python.org/download/other/)
 
+
 ### Development requirements
 
 The following requirements are NOT required to run the `test_project_python` package locally (after installing with `python -m pip install --upgrade test_project_python`), but ARE required to follow along with the [Building a python package for distribution](#building-a-python-package-for-distribution) section below.
@@ -49,6 +50,7 @@ python -m pip install --upgrade pip build twine
 The download link below to GnuPG is NOT required for the [Building a python package for distribution](#building-a-python-package-for-distribution) section below, but will enable you to sign your package.
 - https://gnupg.org/download/
 - for more details about downloading, installing, and using `gpg` (and related tools), see the [GPG section](../README.md#gpg) under the [Programming language agnostic tools section](../README.md#programming-language-agnostic-tools) in the [main README in the GitHub repository](../README.md)
+
 
 ## Project Structure
 
@@ -283,6 +285,7 @@ Also note that running python files as modules locally creates a `__pycache__` d
     ├── entry_points.txt
     └── top_level.txt
 ```
+
 
 ## Examples
 
