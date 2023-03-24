@@ -297,7 +297,7 @@ Also note that running python files as modules locally creates a `__pycache__` d
 ```
 
 
-### Development requirements
+## Development requirements
 
 The following requirements are NOT required to run the `test_project_python` package locally (after installing with `python -m pip install --upgrade test_project_python`), but ARE required to follow along with the [Building a python package for distribution](#building-a-python-package-for-distribution) section below.
 
