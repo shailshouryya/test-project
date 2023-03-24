@@ -426,8 +426,8 @@ UserWarning: Normalizing '0.0.2.post.8' to '0.0.2.post8'  # version='0.0.2.post.
 python setup.py clean --all                           # avoid using cached information
 rm -r build/                                          # python setup.py clean --all **should** remove all contents of build/, but just in case
 rm -r project_name.egg-info                           # **should** be updated automatically with both the setup.py and pip install command below, but just in case
-rm -r package_* example_*                             # remove script generated packages (test_project_python specific, another projects will have a different cleaning process)
-python -m test_project_python.make_nested_py_modules  # build script generated packages (test_project_python specific, another projects will have a different build process)
+rm -r package_* example_*                             # remove script generated packages (test_project_python specific, another project will have a different cleaning process)
+python -m test_project_python.make_nested_py_modules  # build script generated packages (test_project_python specific, another project will have a different build process)
 python -m build                                       # build packages for distribution (add --no-isolation to avoid virtual environment requirement)
 python -m pip install .                               # install the package locally
 # run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
@@ -436,13 +436,13 @@ python -m pip install .                               # install the package loca
 ```bat
 :: Windows Command Line (also referred to as CMD, .bat, .cmd, batch script)
 :: NOTE: :: (double colons) is the Windows syntax for writing comments in CMD
-python setup.py clean --all
-rmdir /S /Q build/
-rmdir /S /Q project_name.egg-info
-for /d %G in ("package_*", "example_*") do rmdir /S /Q "%~dpnG"
-python -m test_project_python.make_nested_py_modules
-python -m build                                                 &:: add --no-isolation to avoid virtual environment requirement
-python -m pip install .
+python setup.py clean --all                                      &:: avoid using cached information
+rmdir /S /Q build/                                               &:: python setup.py clean --all **should** remove all contents of build/, but just in case
+rmdir /S /Q project_name.egg-info                                &:: **should** be updated automatically with both the setup.py and pip install command below, but just in case
+for /d %G in ("package_*", "example_*") do rmdir /S /Q "%~dpnG"  &:: remove script generated packages (test_project_python specific, another project will have a different cleaning process)
+python -m test_project_python.make_nested_py_modules             &:: build script generated packages (test_project_python specific, another project will have a different build process)
+python -m build                                                  &:: build packages for distribution (add --no-isolation to avoid virtual environment requirement)
+python -m pip install .                                          &:: install the package locally
 :: run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 ```
 
@@ -465,15 +465,18 @@ you can do
 > del   -r the_path_to_folder             # equivalent
 > erase -r the_path_to_folder             # equivalent
 > rd    -r the_path_to_folder             # equivalent
+
+NOTE that Remove-Item does NOT accept multiple
+arguments to Remove-Item (and the aliases also do not accept multiple arguments)
 #>
-python setup.py clean --all
-Remove-Item -recurse -path build/
-Remove-Item -recurse -path project_name.egg-info
-Remove-Item -recurse -path package_*             # notice that Remove-Item does NOT accept multiple
-Remove-Item -recurse -path example_*             # arguments to Remove-Item (or any of its aliases)
-python -m test_project_python.make_nested_py_modules
-python -m build                                  # add --no-isolation to avoid virtual environment requirement
-python -m pip install .
+python setup.py clean --all                            # avoid using cached information
+Remove-Item -recurse -path build/                      # python setup.py clean --all **should** remove all contents of build/, but just in case
+Remove-Item -recurse -path project_name.egg-info       # **should** be updated automatically with both the setup.py and pip install command below, but just in case
+Remove-Item -recurse -path package_*                   # remove script generated packages (test_project_python specific, another project will have a different cleaning process)
+Remove-Item -recurse -path example_*                   # remove script generated packages (test_project_python specific, another project will have a different cleaning process)
+python -m test_project_python.make_nested_py_modules   # build script generated packages (test_project_python specific, another project will have a different build process)
+python -m build                                        # build packages for distribution (add --no-isolation to avoid virtual environment requirement)
+python -m pip install .                                # install the package locally
 # run the sequence again (so run the 8 commands sequentially twice) just in case something somehow remains cached
 ```
 
