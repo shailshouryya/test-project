@@ -21,6 +21,8 @@ This project contains a dummy python project to
     - packaging.python.org landing page: [Python Packaging User Guide](https://packaging.python.org/en/latest/)
       - maintained by [Python Packaging Authority](https://www.pypa.io/en/latest/)
 
+The information included below covers building both an [import package](https://packaging.python.org/en/latest/glossary/#term-Import-Package) **and** a [distribution package](https://packaging.python.org/en/latest/glossary/#term-Distribution-Package).
+
 
 ## Requirements
 
