@@ -44,6 +44,7 @@ This repository contains dummy projects in different programming languages to te
         - NOTE that an uppercase `v`, such as `V1.2.3`, does not qualify as a valid semantic versioning tag by this definition
       - reverse alphabetical order as the tiebreaker (so `tag-d` will appear before `tag-c`) when the tag uses an **invalid** semantic versioning tag (starts with anything **other than** a digit or a lowercase `v`)
   - example sort order (same order on both the [Tags page](https://github.com/shailshouryya/test-project/tags) and [Releases page](https://github.com/shailshouryya/test-project/releases):
+
 ```
 # these are correctly sorted in reverse chronological order
 0.0.2.post7-python
@@ -59,6 +60,7 @@ This repository contains dummy projects in different programming languages to te
 0.0.2-python
 0.0.1-python
 ```
+
   - see the following references for more information:
     - GitHub REST API docs indicate the latest release on the releases page (github.com/yourusername/yourreponame/releases) uses the [the most recent non-prerelease, non-draft release, sorted by the created_at attribute. The created_at attribute is the date of the commit used for the release, and not the date when the release was drafted or published.](https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-the-latest-release)
       - however, the SORTING of ALL the releases is more nuanced: GitHub currently uses [a mix of](https://github.com/Shadowsocks-NET/QvStaticBuild/releases#discussioncomment-4697709)) [Semver 2.0.0](https://semver.org/spec/v2.0.0.html) and [pep440](https://peps.python.org/pep-0440/)
@@ -67,8 +69,8 @@ This repository contains dummy projects in different programming languages to te
         - when the tag does use semantic versioning, only the first 3 numeric parts of a tag are used for the semantic version ordering, and then everything after is not parsed, and is sorted (reverse) alphabetically
           - [for `v4.10.0-alpha.3.10.geb2e56af` and `v4.10.0-alpha.3.9.ge0d22139`, semver only cares about the first 3 numeric parts (`v4.10.0`), and then everything after the `-` is not parsed and only sorted (reverse) alphabetically, so `3.10` appears below `3.9` because `1` comes before `9`.](https://github.com/Shadowsocks-NET/QvStaticBuild/releases#discussioncomment-4694630)
           - NOTE that if [the version starts with an upper case `V` (instead of a lower case `v`), the sorting falls back to string sorting. The version is only parsed as semver if the first character of the version is exactly the lower case `v`.]
-
 - the `Compare` buttons on the [Releases page](https://github.com/shailshouryya/test-project/releases) seem to follow some entirely different order, with no obvious pattern:
+
 ```
 # these are sorted in NEITHER reverse chronological order NOR reverse alphabetical order
 0.0.2.post5-python

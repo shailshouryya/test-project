@@ -4,6 +4,7 @@ NOTE: substitute the alias you set for `python` on your local machine for any co
 
 
 This project contains a dummy python project to
+
 - test how packaging works for python
   - using the `setuptools`  module
     - see the comments in the `setup.py` file for more references and information
@@ -52,6 +53,7 @@ The download link below to GnuPG is NOT required for the [Building a python pack
 ## Project Structure
 
 Note that some of the files below are configuration/build/binary files auto-generated after running commands to set up the package locally, and are NOT included in the repo:
+
 - the ([no longer recommended](https://blog.ganssle.io/tag/setuptools.html#summary)) `python setup.py sdist` commands creates
   - `dist/test-project-python-0.0.2.post8.tar.gz`
   - `test_project_python.egg-info` (and nested contents)
@@ -76,12 +78,13 @@ Note that some of the files below are configuration/build/binary files auto-gene
   - `dist/test_project_python-0.0.2.post8-py3-none-any.whl.asc`
 
 Also note that running python files as modules locally creates a `__pycache__` directory and `.pyc` file nested inside the `__pycache__` directory (which were manually excluded from the structure below) for that corresponding module!
+
 - note that this
   - only happens when running `python3 -m path.to.module.name`
   - does NOT happen when running `python3 path/to/module/name.py`
 
-
 (structure taken from the output of the `tree` command run from the `test-project/python` directory)
+
 ```
 .
 ├── README.md
@@ -359,6 +362,7 @@ ERROR    HTTPError: 400 Bad Request from https://test.pypi.org/legacy/
 ```
 
 NOTE that Python's versioning rules outlined in [PEP 440](https://peps.python.org/pep-0440/) are different and impose more restrictions than both `git` and GitHub do.
+
 - for more details about versioning rules and guidelines for `git` and GitHub, see the [Version tag rules section](../README.md#version-tag-rules) under the [General Guidelines section](../README.md#general-guidelines) in the [main README in the GitHub repository](../README.md)
 
 Also note that Python build tools (such as `setuptools` and `build`) normalize valid semantic version tags to follow a `#.#.#.suffix#` format, so you'll see a message such as the following when building your package with a command like `python -m build` or `python -m build --no-isolation` if your tag **does follow valid semantic versioning** rules, but does not follow the `#.#.#.suffix#` format (NOTE that this does not apply if your tag format is only `#.#.#` and does not have a suffix):
@@ -485,6 +489,7 @@ twine upload dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_n
 ```
 
 Uploading a package to a Python packaging index using a tool such as [`twine`](https://twine.readthedocs.io/en/stable/) requires having an account on the corresponding index. In other words, to upload to
+
 - the [Test PyPI](https://test.pypi.org) index, you need to [make an account there](https://test.pypi.org/account/register/) if you do not already have one
 - the [PyPI](https://pypi.org) index, you need to [make an account there](https://pypi.org/account/register/) if you do not already have one
 - a private index, you need to have an account with the hosting organization and sufficient privileges to publish packages
