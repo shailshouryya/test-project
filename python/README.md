@@ -41,22 +41,27 @@ If you do not have Python installed, or have an older version of Python, you can
 
 ## Examples
 
+
+### Installing or upgrading the `test_project_python` package
 ```text
-### install/upgrade the test_project_python package ###
 python -m pip install --upgrade test_project_python
+```
 
 
+### Running modules defined in the `test_project_python` package
 
-### run modules defined in the test_project_python package ###
+```text
 python -m test_project_python.make_nested_py_modules
 # now take a look at the directories and modules created by this command
 
 python -m test_project_python.make_nested_py_modules_examples
 # now take a look at the directories and modules created by this command
+```
 
 
+### Running commands defined in `entry_points['console_scripts']` located in the `setup.py` module
 
-### run commands defined in entry_points['console_scripts'] located in the setup.py module ###
+```text
 command_name
 command_name_for_function_in__main__
 ```
@@ -409,20 +414,17 @@ UserWarning: Normalizing '0.0.2.post.8' to '0.0.2.post8'  # version='0.0.2.post.
 
 ## Building a python package for distribution
 
-```text
-# update the package version to the new MAJOR.MINOR.PATCH everywhere in the project
+To build a Python package for distribution for other people, update your package version to the new `MAJOR.MINOR.PATCH` version (or `MAJOR.MINOR.PATCH.suffix` or `MAJOR.MINOR.PATCH.suffix#`) everywhere in the project. Then, run the following commands from the root of your python project (and make sure your `setup.py` module is here) using the commands for the operating system and shell you are using. In the `test_project_python` project, this is from the `/path/to/test-project/python` directory (which is where the `setup.py` module is located).
 
 
-# run the following commands from the root of your python project (and make sure your setup.py module is here)
-# using the commands for the operating system and shell you are using
-#
-# in the test_project_python project, this is from the
-# /path/to/test-project/python directory (the setup.py module is here)
-```
+### Preparing the package for distribution
+
+
+#### Unix terminals such as bash, sh, zsh, ...
 
 ```bash
-# Unix terminals such as bash, sh, zsh, ...
 # https://stackoverflow.com/questions/34928001/distutils-ignores-changes-to-setup-py-when-building-an-extension
+
 python setup.py clean --all                           # avoid using cached information
 rm -r build/                                          # python setup.py clean --all **should** remove all contents of build/, but just in case
 rm -r project_name.egg-info                           # **should** be updated automatically with both the setup.py and pip install command below, but just in case
@@ -430,12 +432,16 @@ rm -r package_* example_*                             # remove script generated 
 python -m test_project_python.make_nested_py_modules  # build script generated packages (test_project_python specific, another project will have a different build process)
 python -m build                                       # build packages for distribution (add --no-isolation to avoid virtual environment requirement)
 python -m pip install .                               # install the package locally
+
 # run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 ```
 
+
+#### Windows Command Line (also referred to as CMD, .bat, .cmd, batch script)
+
 ```bat
-:: Windows Command Line (also referred to as CMD, .bat, .cmd, batch script)
 :: NOTE: :: (double colons) is the Windows syntax for writing comments in CMD
+
 python setup.py clean --all                                      &:: avoid using cached information
 rmdir /S /Q build/                                               &:: python setup.py clean --all **should** remove all contents of build/, but just in case
 rmdir /S /Q project_name.egg-info                                &:: **should** be updated automatically with both the setup.py and pip install command below, but just in case
@@ -443,8 +449,12 @@ for /d %G in ("package_*", "example_*") do rmdir /S /Q "%~dpnG"  &:: remove scri
 python -m test_project_python.make_nested_py_modules             &:: build script generated packages (test_project_python specific, another project will have a different build process)
 python -m build                                                  &:: build packages for distribution (add --no-isolation to avoid virtual environment requirement)
 python -m pip install .                                          &:: install the package locally
+
 :: run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 ```
+
+
+#### PowerShell
 
 ```powershell
 <#
@@ -469,6 +479,7 @@ you can do
 NOTE that Remove-Item does NOT accept multiple
 arguments to Remove-Item (and the aliases also do not accept multiple arguments)
 #>
+
 python setup.py clean --all                            # avoid using cached information
 Remove-Item -recurse -path build/                      # python setup.py clean --all **should** remove all contents of build/, but just in case
 Remove-Item -recurse -path project_name.egg-info       # **should** be updated automatically with both the setup.py and pip install command below, but just in case
@@ -477,30 +488,45 @@ Remove-Item -recurse -path example_*                   # remove script generated
 python -m test_project_python.make_nested_py_modules   # build script generated packages (test_project_python specific, another project will have a different build process)
 python -m build                                        # build packages for distribution (add --no-isolation to avoid virtual environment requirement)
 python -m pip install .                                # install the package locally
+
 # run the sequence again (so run the 8 commands sequentially twice) just in case something somehow remains cached
 ```
 
-The following commands are operating system and shell agnostic, and should not require modification:
+
+### Signing the package with GPG (optional)
+
+- NOTE that your command may be `gpg2` instead of `gpg` (depends on how you installed this)
+- also NOTE that the dashes or underscores in the `dist/projectname.tar.gz` is dependent on how you named things in your `setup.py` module
+  - more specifically, the file name depends on the `name` argument provided to the `setuptools.setup` function
+    - if you use underscores for the `name` value, the file will be `dist/project_name-MAJOR.MINOR.PATCH.tar.gz` (or `dist/project_name-MAJOR.MINOR.PATCH.suffix.tar.gz` or `dist/project_name-MAJOR.MINOR.PATCH.suffix.tar.gz`)
+    - if you use dashes for the `name` value, the file will be `dist/project-name-MAJOR.MINOR.PATCH.tar.gz` (or `dist/project-name-MAJOR.MINOR.PATCH.suffix.tar.gz` or `dist/project-name-MAJOR.MINOR.PATCH.suffix#.tar.gz`)
 
 ```text
-# sign the package with your gpg key (optional)
-# NOTE that your command may be `gpg2` instead of `gpg` (depends on how you installed this)
-# also NOTE that the dashes or underscores in the dist/projectname.tar.gz is dependent on how
-#      you named things in your setup.py module; specifically dependent on the `name` argument
-#      you provide to the setuptools.setup function (if you use underscores for the `name` value, the
-#          file will be dist/project_name.tar.gz, whereas if you use dashes for the `name` value, the
-#          file will be dist/project-name.tar.gz)
 gpg --detach-sign -a dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl
 gpg --detach-sign -a dist/project-name-MAJOR.MINOR.PATCH.tar.gz
+```
 
 
-### upload to PyPI ###
-# upload to https://test.pypi.org/
+### Uploading the package to the hosting index
+
+
+#### Uploading the new package to https://test.pypi.org/
+
+```text
 twine upload --repository-url https://test.pypi.org/legacy/ dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl.asc dist/project-name-MAJOR.MINOR.PATCH.tar.gz dist/project-name-MAJOR.MINOR.PATCH.tar.gz.asc
+```
 
-# upload to https://pypi.org/
+
+#### Uploading the new package to https://pypi.org/
+
+- does **not** require specifying the `--repository-url`
+
+```text
 twine upload dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl.asc dist/project-name-MAJOR.MINOR.PATCH.tar.gz dist/project-name-MAJOR.MINOR.PATCH.tar.gz.asc
 ```
+
+NOTE that if you want to upload **all** packages to an index, you can specify `dist/*` instead of individually listing each package you want to upload. Keep in mind that you cannot overwrite already existing versions of a package on Test PyPI and PyPI (which is **probably** true for a private index and self-hosted index as well).
+
 
 Uploading a package to a Python packaging index using a tool such as [`twine`](https://twine.readthedocs.io/en/stable/) requires having an account on the corresponding index. In other words, to upload to
 
