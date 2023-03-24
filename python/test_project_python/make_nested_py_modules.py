@@ -193,7 +193,6 @@ def create_modules_for_subpackage(
         module_file_path = os.path.join(package_path, f'{module_name}.py')
         with open(module_file_path, mode='w', encoding='utf-8', buffering=-1) as file:
             file.write(f'''print('{package_name}.{module_name}')\n''')
-            file.write('')
 
 
 if __name__ == '__main__':
