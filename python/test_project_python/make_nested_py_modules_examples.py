@@ -1,5 +1,6 @@
 from . import make_nested_py_modules
 
+
 EXAMPLE_1 = {
     1: {
         'subpackage_prefixes': ['example_1_package'],
@@ -46,6 +47,7 @@ EXAMPLE_3 = {
         'module_suffixes':     ['a', 'b', 'c', 'd', 'e'],
     },
 }
+
 
 def main() -> None:
     make_nested_py_modules.main(package_levels=EXAMPLE_1, start=1, end=7, directory_removal_prefixes=['example_1_package'])
