@@ -28,26 +28,26 @@ def main(
             1: {
                 'subpackage_prefixes': ['package_'],
                 'subpackage_suffixes': ['a', 'b', 'c'],
-                'module_prefixes': ['module_'],
-                'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
+                'module_prefixes':     ['module_'],
+                'module_suffixes':     ['a', 'b', 'c', 'd', 'e'],
             },
             2: {
                 'subpackage_prefixes': ['subpackage_'],
                 'subpackage_suffixes': ['a', 'b', 'c'],
-                'module_prefixes': [''],
-                'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
+                'module_prefixes':     [''],
+                'module_suffixes':     ['a', 'b', 'c', 'd', 'e'],
             },
             3: {
                 'subpackage_prefixes': ['subpackage_'],
                 'subpackage_suffixes': ['a', 'b', 'c'],
-                'module_prefixes': [''],
-                'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
+                'module_prefixes':     [''],
+                'module_suffixes':     ['a', 'b', 'c', 'd', 'e'],
             },
             4: {
                 'subpackage_prefixes': ['subpackage_'],
                 'subpackage_suffixes': ['a', 'b', 'c'],
-                'module_prefixes': [''],
-                'module_suffixes': ['a', 'b', 'c', 'd', 'e'],
+                'module_prefixes':     [''],
+                'module_suffixes':     ['a', 'b', 'c', 'd', 'e'],
             },
         }
     create_packages(package_levels, start, end, base_path='.', base_name='', __init__files=[])
