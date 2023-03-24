@@ -443,7 +443,7 @@ To build a Python package for distribution for other people, update your package
 # https://stackoverflow.com/questions/34928001/distutils-ignores-changes-to-setup-py-when-building-an-extension
 
 python setup.py clean --all                           # avoid using cached information
-rm -r build/                                          # python setup.py clean --all **should** remove all contents of build/, but just in case
+rm -r build                                           # python setup.py clean --all **should** remove all contents of build/, but just in case
 rm -r project_name.egg-info                           # **should** be updated automatically with both the setup.py and pip install command below, but just in case
 rm -r package_* example_*                             # remove script generated packages (test_project_python specific, another project will have a different cleaning process)
 python -m test_project_python.make_nested_py_modules  # build script generated packages (test_project_python specific, another project will have a different build process)
@@ -498,7 +498,7 @@ arguments to Remove-Item (and the aliases also do not accept multiple arguments)
 #>
 
 python setup.py clean --all                            # avoid using cached information
-Remove-Item -recurse -path build/                      # python setup.py clean --all **should** remove all contents of build/, but just in case
+Remove-Item -recurse -path build                       # python setup.py clean --all **should** remove all contents of build/, but just in case
 Remove-Item -recurse -path project_name.egg-info       # **should** be updated automatically with both the setup.py and pip install command below, but just in case
 Remove-Item -recurse -path package_*                   # remove script generated packages (test_project_python specific, another project will have a different cleaning process)
 Remove-Item -recurse -path example_*                   # remove script generated packages (test_project_python specific, another project will have a different cleaning process)
