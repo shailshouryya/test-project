@@ -6,6 +6,7 @@ EXAMPLE_1 = {
         'subpackage_prefixes': ['example_1_package'],
     }
 }
+
 EXAMPLE_2 = {
     1: {
         'subpackage_prefixes': ['example_2_package'],
