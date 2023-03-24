@@ -460,7 +460,7 @@ python -m pip install .                               # install the package loca
 :: NOTE: :: (double colons) is the Windows syntax for writing comments in CMD
 
 python setup.py clean --all                                      &:: avoid using cached information
-rmdir /S /Q build/                                               &:: python setup.py clean --all **should** remove all contents of build/, but just in case
+rmdir /S /Q build                                                &:: python setup.py clean --all **should** remove all contents of build/, but just in case
 rmdir /S /Q project_name.egg-info                                &:: **should** be updated automatically with both the setup.py and pip install command below, but just in case
 for /d %G in ("package_*", "example_*") do rmdir /S /Q "%~dpnG"  &:: remove script generated packages (test_project_python specific, another project will have a different cleaning process)
 python -m test_project_python.make_nested_py_modules             &:: build script generated packages (test_project_python specific, another project will have a different build process)
