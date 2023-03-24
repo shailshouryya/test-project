@@ -441,7 +441,7 @@ rmdir /S /Q build/
 rmdir /S /Q project_name.egg-info
 for /d %G in ("package_*", "example_*") do rmdir /S /Q "%~dpnG"
 python -m test_project_python.make_nested_py_modules
-python -m build                                                 :: add --no-isolation to avoid virtual environment requirement
+python -m build                                                 &:: add --no-isolation to avoid virtual environment requirement
 python -m pip install .
 :: run the sequence again (so run the 7 commands sequentially twice) just in case something somehow remains cached
 ```
