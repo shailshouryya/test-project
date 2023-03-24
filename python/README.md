@@ -43,6 +43,8 @@ If you do not have Python installed, or have an older version of Python, you can
 
 ## Examples
 
+NOTE that the following commands need to be run from your shell, and **not** your python interpreter!
+
 
 ### Installing or upgrading the `test_project_python` package
 ```text
@@ -518,6 +520,8 @@ python -m pip install .                                # install the package loc
     - if you use underscores for the `name` value, the file will be `dist/project_name-MAJOR.MINOR.PATCH.tar.gz` (or `dist/project_name-MAJOR.MINOR.PATCH.suffix.tar.gz` or `dist/project_name-MAJOR.MINOR.PATCH.suffix.tar.gz`)
     - if you use dashes for the `name` value, the file will be `dist/project-name-MAJOR.MINOR.PATCH.tar.gz` (or `dist/project-name-MAJOR.MINOR.PATCH.suffix.tar.gz` or `dist/project-name-MAJOR.MINOR.PATCH.suffix#.tar.gz`)
 
+NOTE that the following commands need to be run from your shell, and **not** your python interpreter!
+
 ```text
 gpg --detach-sign -a dist/project_name-MAJOR.MINOR.PATCH-py3-none-any.whl
 gpg --detach-sign -a dist/project-name-MAJOR.MINOR.PATCH.tar.gz
@@ -536,6 +540,7 @@ Uploading a package to a Python packaging index using a tool such as [`twine`](h
 
 Also NOTE that if you want to upload **all** packages to an index, you can specify `dist/*` instead of individually listing each package you want to upload as the examples do below. Keep in mind that you cannot overwrite already existing versions of a package on Test PyPI and PyPI (which is **probably** true for a private index and self-hosted index as well).
 
+NOTE that the following commands need to be run from your shell, and **not** your python interpreter!
 
 #### Uploading the new package to https://test.pypi.org/
 
