@@ -454,8 +454,8 @@ A guide on building a Python project would be incomplete without including any o
         - as opposed to a `production` project in Python that does something important
 - NOTE that Python does not have a ["true" `private` access modifier](https://en.wikipedia.org/wiki/Access_modifiers#Names_of_keywords) that is enforced by the Python language, but does have [class name mangling](https://docs.python.org/3/reference/expressions.html#atom-identifiers)
 
-<summary>
-<details><strong>More references for naming conventions</strong></details>
+<details>
+<summary><strong>More references for naming conventions</strong></summary>
 
 This is mentioned in some of the links below as well, but placing here for quick reference: Python modules and packages need to be `import`able, and Python does not allow hyphens to be used in an `import` path. This means you need to name all your modules (files ending in `.py`) and packages (folders containing Python modules) **without** any hyphens! Having underscores in the module name or package name are okay, though.
 
