@@ -452,6 +452,40 @@ A guide on building a Python project would be incomplete without including any o
       - however, the `test` is intended to be an adjective describing the `project_python` in this context
         - this is a `test` project in Python that outlines how to do things
         - as opposed to a `production` project in Python that does something important
+- NOTE that Python does not have a ["true" `private` access modifier](https://en.wikipedia.org/wiki/Access_modifiers#Names_of_keywords) that is enforced by the Python language, but does have [class name mangling](https://docs.python.org/3/reference/expressions.html#atom-identifiers)
+
+<summary>
+<details><strong>More references for naming conventions</strong></details>
+
+This is mentioned in some of the links below as well, but placing here for quick reference: Python modules and packages need to be `import`able, and Python does not allow hyphens to be used in an `import` path. This means you need to name all your modules (files ending in `.py`) and packages (folders containing Python modules) **without** any hyphens! Having underscores in the module name or package name are okay, though.
+
+- [Best practices for naming python utils / extending core modules?](https://softwareengineering.stackexchange.com/questions/438589/best-practices-for-naming-python-utils-extending-core-modules)
+- [Python Same Module Name Convention](https://stackoverflow.com/questions/44221225/python-same-module-name-convention)
+- [Naming convention and structure for utility classes and methods](https://stackoverflow.com/questions/1271254/naming-convention-and-structure-for-utility-classes-and-methods)
+- [Folder naming convention for python projects](https://stackoverflow.com/questions/52827722/folder-naming-convention-for-python-projects)
+- [Python naming conventions for modules in subpackages](https://stackoverflow.com/questions/60057775/python-naming-conventions-for-modules-in-subpackages)
+- [Semantically more appropriate package name than `util` for the following things?](https://softwareengineering.stackexchange.com/questions/284799/semantically-more-appropriate-package-name-than-util-for-the-following-things)
+- [Python file naming convention?](https://softwareengineering.stackexchange.com/questions/308972/python-file-naming-convention)
+  - Python files are referred to as "modules", so refer to the "Module Naming" section here [Python Naming Convention](https://github.com/naming-convention/naming-convention-guides/tree/master/python)
+- [How to choose proper variable names for long names in python](https://stackoverflow.com/questions/48721582/how-to-choose-proper-variable-names-for-long-names-in-python/48721872#48721872)
+- [Naming](https://google.github.io/styleguide/pyguide.html#s3.16-naming) section of the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
+- [PEP 423 – Naming conventions and recipes related to packaging](https://peps.python.org/pep-0423/)
+- [Stop naming your python modules "utils"](https://www.reddit.com/r/Python/comments/g1dxfn/stop_naming_your_python_modules_utils/)
+- [Util Packages Are Evil](https://www.adam-bien.com/roller/abien/entry/util_packages_are_evil)
+- [Anti-Patterns and Worst Practices – Utils Class](https://lostechies.com/chrismissal/2009/06/01/anti-patterns-and-worst-practices-utils-class/)
+- [Clean code tips - names and functions](https://www.code4it.dev/blog/clean-code-names-and-functions)
+- [Clean Code - Naming](https://dipta007.com/clean-code-naming/)
+- [Use prepositions in naming verb-phrase functions?](https://softwareengineering.stackexchange.com/questions/404135/use-prepositions-in-naming-verb-phrase-functions)
+- [Use verbs with functions, nouns with classes - what about interfaces? [closed]](https://softwareengineering.stackexchange.com/questions/156824/use-verbs-with-functions-nouns-with-classes-what-about-interfaces)
+- [Chapter 1. Naming Conventions](https://www.oreilly.com/library/view/java-pocket-guide/9781491938683/ch01.html) (from [Java Pocket Guide, 4th Edition](https://www.oreilly.com/library/view/java-pocket-guide/9781491938683/)
+- [Noun-classes and verb-classes](https://medium.com/@wladislavk/noun-classes-and-verb-classes-b39eebb5c942)
+- [Do I ought to follow naming conventions for Java packages?](https://stackoverflow.com/questions/38635340/do-i-ought-to-follow-naming-conventions-for-java-packages) (about Java, but useful discussion)
+- [A Grammar-Based Naming Convention](https://dev.to/somedood/a-grammar-based-naming-convention-13jf)
+- [interesting discussion in comments here](https://dev.to/somedood/a-grammar-based-naming-convention-13jf?comments_sort=oldest#toggle-comments-sort-dropdown)
+- [Python package name conventions](https://stackoverflow.com/questions/2713874/python-package-name-conventions)
+- [Use a single name](https://peps.python.org/pep-0423/#use-a-single-name)
+
+</details>
 
 
 ## Building a python package for distribution
