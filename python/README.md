@@ -431,6 +431,29 @@ UserWarning: Normalizing '0.0.2.post.8' to '0.0.2.post8'  # version='0.0.2.post.
 ```
 
 
+## Naming conventions
+
+A guide on building a Python project would be incomplete without including any of the two hardest things in computer science: naming things, cache invalidation, and off-by-one errors. There are many conventions for naming things in your project, and picking something that satisfies all the different conventions is (probably) impossible. You should try to pick something that is easily understandable and intuitive to other people, since your project will (eventually) be read/used by other people. This project uses the principles outlined in [Robert Martin](https://blog.cleancoder.com/)'s [A Handbook of Agile Software Craftsmanship](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) book (see a [quick summary here](https://thecoderoad.blog/2020/03/29/clean-code-naming-conventions/). A quick overview:
+
+- variables, arguments/parameters, and constants use a noun or noun phrase for the name (this would also apply to classes, but this project does not (currently) use any classes)
+- functions use a verb or verb phrase (you'll typically see this described as "methods" - but since this project does not (currently) use any classes, there are only functions and no methods)
+  - [A Grammar-Based Naming Convention](https://dev.to/somedood/a-grammar-based-naming-convention-13jf#functions) suggests naming functions using a combination of two parts: a transitive verb and a direct object
+    - "In other words, the names for functions are usually in the form of `verb + noun`. This communicates to us that the name is a command, or rather a function, that we can call whenever we want."
+  - some simple examples without [going too deep into English grammar](https://english.stackexchange.com/questions/218157/adjectives-versus-noun-adjuncts) (not all of these examples are actual functions in the project):
+    - `{verb or verb_phrase}_{noun or noun_phrase}` such as `create_subpackage`
+    - `{word or word_phrase describing}_{verb or verb_phrase}_{noun or noun_phrase}` such as `quickly_create_subpackage`
+    - `{verb or verb_phrase}_{word or word_phrase describing}_{noun or noun_phrase}` such as `create_important_subpackage`
+    - `{verb or verb_phrase}_{noun or noun_phrase}_{extended description}` such as `create_subpackage_later` or `create_modules_for_subpackage`
+- modules use a noun or noun phrase
+  - this does not seem to be explicitly outlined, but since modules are semantically more like classes than they are like functions/methods, modules use this naming convention in this project
+- packages use a noun or noun phrase
+  - this also does not seem to be explicitly outlined, but a package is a group of modules, and modules use a noun or noun phrase as their name, so the package also uses this as the naming convention in this project
+    - **technically**, `test_project_python` can be a `{verb}_{noun_phrase}` as well since `test` is also a verb
+      - however, the `test` is intended to be an adjective describing the `project_python` in this context
+        - this is a `test` project in Python that outlines how to do things
+        - as opposed to a `production` project in Python that does something important
+
+
 ## Building a python package for distribution
 
 To build a Python package for distribution for other people, update your package version to the new `MAJOR.MINOR.PATCH` version (or `MAJOR.MINOR.PATCH.suffix` or `MAJOR.MINOR.PATCH.suffix#`) everywhere in the project. Then, run the following commands from the root of your python project (and make sure your `setup.py` module is here) using the commands for the operating system and shell you are using. In the `test_project_python` project, this is from the `/path/to/test-project/python` directory (which is where the `setup.py` module is located).
