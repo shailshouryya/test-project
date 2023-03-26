@@ -1,19 +1,19 @@
 from pprint import pprint
-from typing import Collection, List, Mapping, Optional, Tuple, TypeVar
+from typing import Callable, Collection, List, Mapping, Optional, Tuple, TypeVar
 
 from test_project_python.package_builder import (
     verify_instance_is_from_type,
 )
 
 
-TestCases                         = TypeVar('TestCases') 
+InputArguments                         = TypeVar('InputArguments') 
 
 
 def main():
     test_function(data_verify_instance_is_from_type)
 
 
-def test_function(function_data):
+def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
     function, test_cases = function_data
     successes           = 0
     failures            = 0
