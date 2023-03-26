@@ -39,30 +39,30 @@ def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
 
 
 def format_result(function, input_arguments, description):
-    return f'{description}:\n    {function.__name__}{input_arguments}'
+    return f'{description}: {function.__name__}{input_arguments}'
 
 none_type  = type(None)
 data_verify_instance_is_from_type = [
     verify_instance_is_from_type,
     (
-        (('s',    str,                   'str_var'),      '`str` input with string as only acceptable type'),
-        ((1,      int,                    'int_var'),     '`int` input with `int` as only acceptable type'),
-        ((1.0,    float,                  'float_var'),   '`float` input with `float` as only acceptable type'),
-        (([],     Collection,             'list_var'),    '`list` input with `Collection` as only acceptable type'),
+        (('s',    str,                   'str_var'),      '`str`   input with string       as only acceptable type'),
+        ((1,      int,                    'int_var'),     '`int`   input with `int`        as only acceptable type'),
+        ((1.0,    float,                  'float_var'),   '`float` input with `float`      as only acceptable type'),
+        (([],     Collection,             'list_var'),    '`list`  input with `Collection` as only acceptable type'),
         (((),     Collection,             'tuple_var'),   '`tuple` input with `Collection` as only acceptable type'),
-        (({},     Collection,             'dict_var'),    '`dict` input with `Collection` as only acceptable type'),
-        ((set(),  Collection,             'set_var'),     '`set` input with `Collection` as only acceptable type'),
-        (('s',    Collection,             'str_var'),     '`str` input with `Collection` as only acceptable type'),
-        (({},     Mapping,                'dict_var'),    '`dict` input with `Mapping` as only acceptable type'),
-        (('s',   (str, none_type),       'str_var'),      '`str` input with `str` and `None` as acceptable types'),
-        ((1,     (int, none_type),        'int_var'),     '`int` input with `int` and `None` as acceptable types'),
-        ((1.0,   (float, none_type),      'float_var'),   '`float` input with `float` and `None` as acceptable types'),
-        (([],    (Collection, none_type), 'list_var'),    '`list` input with `Collection` and `None` as acceptable types'),
+        (({},     Collection,             'dict_var'),    '`dict`  input with `Collection` as only acceptable type'),
+        ((set(),  Collection,             'set_var'),     '`set`   input with `Collection` as only acceptable type'),
+        (('s',    Collection,             'str_var'),     '`str`   input with `Collection` as only acceptable type'),
+        (({},     Mapping,                'dict_var'),    '`dict`  input with `Mapping`    as only acceptable type'),
+        (('s',   (str, none_type),       'str_var'),      '`str`   input with `str` and `None`        as acceptable types'),
+        ((1,     (int, none_type),        'int_var'),     '`int`   input with `int` and `None`        as acceptable types'),
+        ((1.0,   (float, none_type),      'float_var'),   '`float` input with `float` and `None`      as acceptable types'),
+        (([],    (Collection, none_type), 'list_var'),    '`list`  input with `Collection` and `None` as acceptable types'),
         (((),    (Collection, none_type), 'tuple_var'),   '`tuple` input with `Collection` and `None` as acceptable types'),
-        (({},    (Collection, none_type), 'dict_var'),    '`dict` input with `Collection` and `None` as acceptable types'),
-        ((set(), (Collection, none_type), 'set_var'),     '`set` input with `Collection` and `None` as acceptable types'),
-        (('s',   (Collection, none_type), 'str_var'),     '`str` input with `Collection` and `None` as acceptable types'),
-        (({},    (Mapping, none_type) ,   'dict_var'),    '`dict` input with `Mapping` and `None` as acceptable types'),
+        (({},    (Collection, none_type), 'dict_var'),    '`dict`  input with `Collection` and `None` as acceptable types'),
+        ((set(), (Collection, none_type), 'set_var'),     '`set`   input with `Collection` and `None` as acceptable types'),
+        (('s',   (Collection, none_type), 'str_var'),     '`str`   input with `Collection` and `None` as acceptable types'),
+        (({},    (Mapping, none_type) ,   'dict_var'),    '`dict`  input with `Mapping` and `None`    as acceptable types'),
     )
 ]
 
