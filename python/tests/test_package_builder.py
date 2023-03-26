@@ -19,15 +19,15 @@ def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
     failures            = 0
     test_case_successes = []
     test_case_failures  = []
-    for test_case, description in test_cases:
+    for input_arguments, description in test_cases:
         try:
-            verify_instance_is_from_type(*test_case)
+            verify_instance_is_from_type(*input_arguments)
         except TypeError as e:
             failures += 1
-            test_case_failures.append((test_case, description))
+            test_case_failures.append((input_arguments, description))
         else:
             successes += 1
-            test_case_successes.append((test_case, description))
+            test_case_successes.append((input_arguments, description))
     print(f'{successes} test cases passed, {failures} test cases failed for the `verify_instance_is_from_type` function!')
     print('Passing test cases:')
     pprint(test_case_successes)
