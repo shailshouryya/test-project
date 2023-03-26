@@ -15,14 +15,16 @@ def main(
     start:                         int                           = 1,
     end:                           int                           = 2,
     directory_removal_prefixes:    Optional[Collection[str]]     = None,
+    has_at_least_one_of:           Collection[str]               = ['__init__.py'],
 ) -> None:
     none_type = type(None)
     validate_instance_is_from_class(package_levels, (none_type, Mapping), 'package_levels')
     validate_instance_is_from_class(start, int, 'start')
     validate_instance_is_from_class(end,   int, 'end')
     validate_instance_is_from_class(directory_removal_prefixes, (none_type, Collection), 'directory_removal_prefixes')
+    validate_instance_is_from_class(has_at_least_one_of,        (none_type, Collection), 'has_at_least_one_of')
     if directory_removal_prefixes is None: directory_removal_prefixes = ['package_']
-    remove_script_created_contents(directory_removal_prefixes)
+    remove_script_created_contents(directory_removal_prefixes, has_at_least_one_of)
     if package_levels is None:
         package_levels = {
             1: {
@@ -72,11 +74,24 @@ def validate_instance_is_from_class(
 
 def remove_script_created_contents(
     directory_removal_prefixes:    Collection[str],
+    has_at_least_one_of       :    Collection[str],
 ) -> None:
     top_level_path, top_level_nested_directories, top_level_files = next(os.walk('.'))
     # print(top_level_path, top_level_nested_directories, top_level_files)
+    remove_directories_with_at_least_one_required_file = f'''Received has_at_least_one_of={has_at_least_one_of}, so only removing directories that match any of the prefixes in directory_removal_prefixes={directory_removal_prefixes} and ALSO have at least one file in has_at_least_one_of.
+    To overwrite this behavior and remove ALL directories in directory_removal_prefixes={directory_removal_prefixes}, update has_at_least_one_of={has_at_least_one_of} to has_at_least_one_of=[] (an empty list).
+    '''
     for nested_directory in top_level_nested_directories:
         if any(nested_directory.startswith(prefix) for prefix in directory_removal_prefixes):
+            if not any(
+                file == required_file
+                for _, _, files in os.walk(os.path.join(top_level_path, nested_directory))
+                for file in files
+                for required_file in has_at_least_one_of or [file] # if has_at_least_one_of=[], there are no requirements to remove the nested_directory
+            ):
+                print(f'WARNING: {nested_directory} matches one of the prefixes provided to directory_removal_prefixes={directory_removal_prefixes}, but does not contain any of the files in has_at_least_one_of={has_at_least_one_of}')
+                print(remove_directories_with_at_least_one_required_file)
+                continue
             remove_directory(nested_directory)
 
 
