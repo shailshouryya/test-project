@@ -1,4 +1,4 @@
-from . import make_nested_py_modules
+from . import package_builder
 
 
 EXAMPLE_1 = {
@@ -51,9 +51,9 @@ EXAMPLE_3 = {
 
 
 def main() -> None:
-    make_nested_py_modules.main(package_levels=EXAMPLE_1, start=1, end=7, directory_removal_prefixes=['example_1_package'])
-    make_nested_py_modules.main(package_levels=EXAMPLE_2, start=1, end=2, directory_removal_prefixes=['example_2_package'])
-    make_nested_py_modules.main(package_levels=EXAMPLE_3, start=1, end=5, directory_removal_prefixes=['example_3_package'])
+    package_builder.main(package_levels=EXAMPLE_1, start=1, end=7, directory_removal_prefixes=['example_1_package'])
+    package_builder.main(package_levels=EXAMPLE_2, start=1, end=2, directory_removal_prefixes=['example_2_package'])
+    package_builder.main(package_levels=EXAMPLE_3, start=1, end=5, directory_removal_prefixes=['example_3_package'])
 
 
 if __name__ == '__main__':
