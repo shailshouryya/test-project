@@ -211,4 +211,4 @@ def create_modules_for_subpackage(
 
 
 if __name__ == '__main__':
-    main()
+    main(has_at_least_one_of=set(('__init__.py',)))
