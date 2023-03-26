@@ -53,7 +53,17 @@ data_verify_instance_is_from_single_acceptable_type = [
     ('s',   Collection, 'str_val'),
     ({},    Mapping,    'dict_val'),
 ]
-
+data_verify_instance_is_from_one_of_multiple_acceptable_types = [
+    ('s',   (str, none_type),       'str_var'),
+    (1,     (int, none_type),        'int_var'),
+    (1.0,   (float, none_type),      'float_var'),
+    ([],    (Collection, none_type), 'list_var'),
+    ((),    (Collection, none_type), 'tuple_var'),
+    ({},    (Collection, none_type), 'dict_var'),
+    (set(), (Collection, none_type), 'set_var'),
+    ('s',   (Collection, none_type), 'str_var'),
+    ({},    (Mapping, none_type) ,   'dict_var'),
+]
 data_verify_instance_is_from_type = [
     verify_instance_is_from_type,
     (
@@ -61,15 +71,11 @@ data_verify_instance_is_from_type = [
             ((obj, acceptable_type, variable_name), f'{variable_name:<9} input with `{str(acceptable_type):<17}` as only acceptable type')
             for obj, acceptable_type, variable_name in data_verify_instance_is_from_single_acceptable_type
         ),
-        (('s',   (str, none_type),       'str_var'),      '`str`   input with `str` and `None`        as acceptable types'),
-        ((1,     (int, none_type),        'int_var'),     '`int`   input with `int` and `None`        as acceptable types'),
-        ((1.0,   (float, none_type),      'float_var'),   '`float` input with `float` and `None`      as acceptable types'),
-        (([],    (Collection, none_type), 'list_var'),    '`list`  input with `Collection` and `None` as acceptable types'),
-        (((),    (Collection, none_type), 'tuple_var'),   '`tuple` input with `Collection` and `None` as acceptable types'),
-        (({},    (Collection, none_type), 'dict_var'),    '`dict`  input with `Collection` and `None` as acceptable types'),
-        ((set(), (Collection, none_type), 'set_var'),     '`set`   input with `Collection` and `None` as acceptable types'),
-        (('s',   (Collection, none_type), 'str_var'),     '`str`   input with `Collection` and `None` as acceptable types'),
-        (({},    (Mapping, none_type) ,   'dict_var'),    '`dict`  input with `Mapping` and `None`    as acceptable types'),
+        *(
+            ((obj, acceptable_types, variable_name), f'{variable_name:<9} input with `{str(acceptable_types):<39}` as only acceptable types')
+            for obj, acceptable_types, variable_name in data_verify_instance_is_from_one_of_multiple_acceptable_types
+        ),
+
     )
 ]
 
