@@ -17,24 +17,18 @@ def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
     function, test_cases = function_data
     successes           = 0
     failures            = 0
-    test_case_successes = []
-    test_case_failures  = []
+    test_case_results = []
     for input_arguments, expected_result, description in test_cases:
         actual_result = run_function(function, input_arguments)
         if actual_result != expected_result:
             failures += 1
-            test_case_failures.append((input_arguments, description, expected_result, actual_result))
         else:
             successes += 1
-            test_case_successes.append((input_arguments, description, expected_result, actual_result))
+        test_case_results.append((input_arguments, description, expected_result, actual_result))
     print(f'{successes} test cases passed, {failures} test cases failed for the `verify_instance_is_from_type` function!')
-    print('Passing test cases:')
-    for test_case_success in test_case_successes:
-        print(format_test_case_result(function, test_case_success))
-    print('Failing test cases:')
-    for test_case_failure in test_case_failures:
-        print(format_test_case_result(function, test_case_failure))
-    return (successes, failures, test_case_successes, test_case_failures)
+    for test_case_result in test_case_results:
+        print(format_test_case_result(function, test_case_result))
+    return (successes, failures, test_case_results)
 
 
 def run_function(function: Callable, input_arguments: Tuple) -> Any:
@@ -51,7 +45,7 @@ def format_test_case_result(function, test_case):
     formatted_match = '==' if expected_result == actual_result else '!='
     formatted_test_case_result = f'{description}: {function.__name__}{input_arguments} {formatted_match} {expected_result}'
     if expected_result != actual_result:
-        formatted_test_case_result += f'\nactaul_result={actual_result}'
+        formatted_test_case_result += f'\n❌ actaul_result={actual_result} ❌'
     return formatted_test_case_result
 
 
