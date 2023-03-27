@@ -19,15 +19,14 @@ def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
     failures            = 0
     test_case_successes = []
     test_case_failures  = []
-    for input_arguments, description in test_cases:
-        try:
-            actual_result = run_function(function, input_arguments)
-        except TypeError as e:
+    for input_arguments, expected_result, description in test_cases:
+        actual_result = run_function(function, input_arguments)
+        if actual_result != expected_result:
             failures += 1
-            test_case_failures.append((input_arguments, description))
+            test_case_failures.append((input_arguments, description, expected_result, actual_result))
         else:
             successes += 1
-            test_case_successes.append((input_arguments, description))
+            test_case_successes.append((input_arguments, description, expected_result, actual_result))
     print(f'{successes} test cases passed, {failures} test cases failed for the `verify_instance_is_from_type` function!')
     print('Passing test cases:')
     for test_case_success in test_case_successes:
@@ -48,7 +47,7 @@ def run_function(function: Callable, input_arguments: Tuple) -> Any:
 
 
 def format_result(function, test_case):
-    input_arguments, description = test_case
+    input_arguments, description, expected_result, actual_result = test_case
     return f'{description}: {function.__name__}{input_arguments}'
 
 none_type  = type(None)
@@ -78,11 +77,11 @@ data_verify_instance_is_from_type = [
     verify_instance_is_from_type,
     (
         *(
-            ((obj, acceptable_type, variable_name), f'{variable_name:<9} input with `{str(acceptable_type):<17}` as only acceptable type')
+            ((obj, acceptable_type, variable_name), None, f'{variable_name:<9} input with `{str(acceptable_type):<17}` as only acceptable type')
             for obj, acceptable_type, variable_name in data_verify_instance_is_from_single_acceptable_type
         ),
         *(
-            ((obj, acceptable_types, variable_name), f'{variable_name:<9} input with `{str(acceptable_types):<39}` as only acceptable types')
+            ((obj, acceptable_types, variable_name), None, f'{variable_name:<9} input with `{str(acceptable_types):<39}` as only acceptable types')
             for obj, acceptable_types, variable_name in data_verify_instance_is_from_one_of_multiple_acceptable_types
         ),
 
