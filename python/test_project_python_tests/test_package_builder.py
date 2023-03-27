@@ -48,7 +48,12 @@ def run_function(function: Callable, input_arguments: Tuple) -> Any:
 
 def format_result(function, test_case):
     input_arguments, description, expected_result, actual_result = test_case
-    return f'{description}: {function.__name__}{input_arguments}'
+    formatted_match = '==' if expected_result == actual_result else '!='
+    formatted_test_case_result = f'{description}: {function.__name__}{input_arguments} {formatted_match} {expected_result}'
+    if expected_result != actual_result:
+        formatted_test_case_result += f'\nactaul_result={actual_result}'
+    return formatted_test_case_result
+
 
 none_type  = type(None)
 data_verify_instance_is_from_single_acceptable_type = [
