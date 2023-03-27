@@ -30,10 +30,10 @@ def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
     print(f'{successes} test cases passed, {failures} test cases failed for the `verify_instance_is_from_type` function!')
     print('Passing test cases:')
     for test_case_success in test_case_successes:
-        print(format_result(function, test_case_success))
+        print(format_test_case_result(function, test_case_success))
     print('Failing test cases:')
     for test_case_failure in test_case_failures:
-        print(format_result(function, test_case_failure))
+        print(format_test_case_result(function, test_case_failure))
     return (successes, failures, test_case_successes, test_case_failures)
 
 
@@ -46,7 +46,7 @@ def run_function(function: Callable, input_arguments: Tuple) -> Any:
         return result
 
 
-def format_result(function, test_case):
+def format_test_case_result(function, test_case):
     input_arguments, description, expected_result, actual_result = test_case
     formatted_match = '==' if expected_result == actual_result else '!='
     formatted_test_case_result = f'{description}: {function.__name__}{input_arguments} {formatted_match} {expected_result}'
