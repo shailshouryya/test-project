@@ -1,5 +1,5 @@
 from pprint import pprint
-from typing import Callable, Collection, List, Mapping, Optional, Tuple, TypeVar
+from typing import Any, Callable, Collection, List, Mapping, Optional, Tuple, TypeVar
 
 from test_project_python.package_builder import (
     verify_instance_is_from_type,
@@ -21,7 +21,7 @@ def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
     test_case_failures  = []
     for input_arguments, description in test_cases:
         try:
-            verify_instance_is_from_type(*input_arguments)
+            actual_result = run_function(function, input_arguments)
         except TypeError as e:
             failures += 1
             test_case_failures.append((input_arguments, description))
@@ -36,6 +36,15 @@ def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
     for test_case_failure in test_case_failures:
         print(format_result(function, test_case_failure))
     return (successes, failures, test_case_successes, test_case_failures)
+
+
+def run_function(function: Callable, input_arguments: Tuple) -> Any:
+    try:
+        result = function(*input_arguments)
+    except Exception as error:
+        result = error
+    finally:
+        return result
 
 
 def format_result(function, test_case):
