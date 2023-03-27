@@ -30,15 +30,16 @@ def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
             test_case_successes.append((input_arguments, description))
     print(f'{successes} test cases passed, {failures} test cases failed for the `verify_instance_is_from_type` function!')
     print('Passing test cases:')
-    for input_arguments, description in test_case_successes:
-        print(format_result(function, input_arguments, description))
+    for test_case_success in test_case_successes:
+        print(format_result(function, test_case_success))
     print('Failing test cases:')
-    for input_arguments, description in test_case_failures:
-        print(format_result(function, input_arguments, description))
+    for test_case_failure in test_case_failures:
+        print(format_result(function, test_case_failure))
     return (successes, failures, test_case_successes, test_case_failures)
 
 
-def format_result(function, input_arguments, description):
+def format_result(function, test_case):
+    input_arguments, description = test_case
     return f'{description}: {function.__name__}{input_arguments}'
 
 none_type  = type(None)
