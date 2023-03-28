@@ -35,7 +35,7 @@ def run_function(function: Callable, input_arguments: Tuple) -> Any:
     try:
         result = function(*input_arguments)
     except Exception as error:
-        result = error
+        result = type(error)
     finally:
         return result
 
