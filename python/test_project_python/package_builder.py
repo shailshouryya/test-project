@@ -59,7 +59,7 @@ def verify_instance_is_from_type(
     obj:                 Any,
     acceptable_types:    Union[T, Tuple],
     variable_name:       str,
-) -> Union[bool, TypeError]:
+) -> Optional[TypeError]:
     if isinstance(acceptable_types, tuple): formatted_acceptable_types = f'one of the following types: {acceptable_types}' # multiple acceptable types
     else:                                   formatted_acceptable_types = f'an instance of {acceptable_types}'              # one      acceptable type
     variable_reference = f'variable `{variable_name}`'
