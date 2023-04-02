@@ -107,7 +107,7 @@ def create_packages(
     end:              int,
     base_path:        str,
     base_name:        str,
-    package__init__files:    Collection[Tuple[str, str]],
+    package__init__files:    Collection[Tuple[TextIO, str]],
 ) -> None:
     if start <= end:
         current_level               = start
