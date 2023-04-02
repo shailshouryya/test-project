@@ -7,13 +7,16 @@ from test_project_python.package_builder import (
 
 
 InputArguments                         = TypeVar('InputArguments') 
+Description                            = str
+ExpectedResult                         = TypeVar('ExpectedResult')
+ActualResult                           = TypeVar('ActualResult')
 
 
 def main():
     test_function(data_verify_instance_is_from_type)
 
 
-def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str, Any]]):
+def test_function(function_data: Tuple[Callable, Tuple[InputArguments, Description, ExpectedResult]]):
     function, test_cases = function_data
     successes           = 0
     failures            = 0
@@ -31,7 +34,7 @@ def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str, Any]
     return (successes, failures, test_case_results)
 
 
-def run_function(function: Callable, input_arguments: Tuple) -> Any:
+def run_function(function: Callable, input_arguments: InputArguments) -> Any:
     try:
         result = function(*input_arguments)
     except Exception as error:
@@ -40,7 +43,7 @@ def run_function(function: Callable, input_arguments: Tuple) -> Any:
         return result
 
 
-def format_test_case_result(function: Callable, test_case: Tuple[InputArguments, str, Any, Any]):
+def format_test_case_result(function: Callable, test_case: Tuple[InputArguments, Description, ExpectedResult, ActualResult]):
     input_arguments, description, expected_result, actual_result = test_case
     formatted_match = '==' if expected_result == actual_result else '!='
     formatted_test_case_result = f'{description}: {function.__name__}{input_arguments} {formatted_match} {expected_result}'
