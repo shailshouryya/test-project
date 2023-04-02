@@ -13,7 +13,7 @@ def main():
     test_function(data_verify_instance_is_from_type)
 
 
-def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str]]):
+def test_function(function_data: Tuple[Callable, Tuple[InputArguments, Any, str]]):
     function, test_cases = function_data
     successes           = 0
     failures            = 0
