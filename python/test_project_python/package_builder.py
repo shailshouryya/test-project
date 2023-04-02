@@ -149,7 +149,7 @@ def determine_subpackage_info(
 
 def determine_module_info_for_subpackage(
     current_package:    PackageLevelDefinition,
-) -> Tuple[str, str]:
+) -> Tuple[Collection[str], Collection[str]]:
     module_suffixes = current_package.get('module_suffixes', ['_name'])
     module_prefixes = current_package.get('module_prefixes', ['module_'])
     return module_prefixes, module_suffixes
