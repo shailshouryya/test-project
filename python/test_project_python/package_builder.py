@@ -2,7 +2,7 @@ import itertools
 import os
 import shutil
 
-from typing import Any, Optional, Collection, Mapping, TextIO, TypeVar, Tuple, Union
+from typing import Any, Optional, Collection, List, Mapping, TextIO, TypeVar, Tuple, Union
 
 
 PackageLevelDefinition = Mapping[str, Collection[str]]
@@ -107,7 +107,7 @@ def create_packages(
     end:              int,
     base_path:        str,
     base_name:        str,
-    package__init__files:    Collection[Tuple[TextIO, str]],
+    package__init__files:    List[Tuple[TextIO, str]],
 ) -> None:
     if start <= end:
         current_level               = start
