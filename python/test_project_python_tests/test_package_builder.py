@@ -13,12 +13,12 @@ def main():
     test_function(data_verify_instance_is_from_type)
 
 
-def test_function(function_data: Tuple[Callable, Tuple[InputArguments, Any, str]]):
+def test_function(function_data: Tuple[Callable, Tuple[InputArguments, str, Any]]):
     function, test_cases = function_data
     successes           = 0
     failures            = 0
     test_case_results = []
-    for input_arguments, expected_result, description in test_cases:
+    for input_arguments, description, expected_result in test_cases:
         actual_result = run_function(function, input_arguments)
         if actual_result != expected_result:
             failures += 1
@@ -76,11 +76,11 @@ data_verify_instance_is_from_type = [
     verify_instance_is_from_type,
     (
         *(
-            ((obj, acceptable_type, variable_name), None, f'{variable_name:<9} input with `{str(acceptable_type):<17}` as only acceptable type')
+            ((obj, acceptable_type, variable_name), f'{variable_name:<9} input with `{str(acceptable_type):<17}` as only acceptable type', None)
             for obj, acceptable_type, variable_name in data_verify_instance_is_from_single_acceptable_type
         ),
         *(
-            ((obj, acceptable_types, variable_name), None, f'{variable_name:<9} input with `{str(acceptable_types):<39}` as only acceptable types')
+            ((obj, acceptable_types, variable_name), f'{variable_name:<9} input with `{str(acceptable_types):<39}` as only acceptable types', None)
             for obj, acceptable_types, variable_name in data_verify_instance_is_from_one_of_multiple_acceptable_types
         ),
 
