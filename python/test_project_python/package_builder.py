@@ -2,7 +2,7 @@ import itertools
 import os
 import shutil
 
-from typing import Any, Optional, Collection, List, Mapping, TextIO, TypeVar, Tuple, Union
+from typing import Any, Optional, Collection, List, Mapping, TextIO, Type, TypeVar, Tuple, Union
 
 
 PackageLevelDefinition = Mapping[str, Collection[str]]
@@ -57,7 +57,7 @@ def main(
 
 def verify_instance_is_from_type(
     obj:                 Any,
-    acceptable_types:    Union[T, Tuple],
+    acceptable_types:    Union[Type, Tuple],
     variable_name:       str,
 ) -> Optional[TypeError]:
     if isinstance(acceptable_types, tuple): formatted_acceptable_types = f'one of the following types: {acceptable_types}' # multiple acceptable types
