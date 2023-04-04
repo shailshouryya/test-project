@@ -70,6 +70,7 @@ def verify_instance_is_from_type(
     '''
     if not isinstance(obj, acceptable_types):
         raise TypeError(error_message)
+    return None
 
 
 def remove_script_created_contents(
