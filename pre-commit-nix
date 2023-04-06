@@ -45,8 +45,15 @@ EOF
 	exit 1
 fi
 
-alias python=python3
-python -m python.pre_commit
+py_files_changed=$(git diff --staged --name-only -- "*.py")
+if [ "$py_files_changed" = "" ]
+  then
+    printf "No python files changed! \n\n"
+  else
+    alias python=python3
+    printf "Python files changed, running python.pre_commit to verify changes...\n\n"
+    python3 -m python.pre_commit
+fi
 
 # If there are whitespace errors, print the offending file names and fail.
 exec git diff-index --check --cached $against --
