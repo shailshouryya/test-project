@@ -23,7 +23,9 @@ def lint_changed_py_files(changed_py_files):
     for changed_py_file in changed_py_files:
         # pylint.run_pylint(pylint_options + [changed_py_file])
         # # calls pylint.lint.Run(argv or sys.argv[1:])
-        pylint.lint.Run(args=[pylint_options, changed_py_file])
+        # # but does not allow specifying the reporter, exit, do_exit
+        # # arguments to pylint.lint.Run.__init__
+        pylint.lint.Run(args=[pylint_options, changed_py_file], exit=False)
 
 
 
