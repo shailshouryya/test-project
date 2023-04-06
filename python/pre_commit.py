@@ -8,6 +8,16 @@ import pylint.lint
 def main():
     changed_py_files = subprocess.getoutput('git diff --name-only --staged "*.py"').splitlines()
     lint_changed_py_files(changed_py_files)
+    static_type_check_packages_and_modules()
+
+
+def static_type_check_packages_and_modules():
+    # the pre-commit-nix file located in ./.git/hooks/pre-commit
+    # calls this (pre_commit.py) module from the test_project
+    # directory, so this module needs to move into the
+    # test_project/python directory in order to find the
+    # test_project_python and test_project_python_tests packages
+    os.chdir('python')
     package_configs = [
         ['-p', 'test_project_python'],
         ['-p', 'test_project_python_tests'],
