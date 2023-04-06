@@ -18,13 +18,22 @@ def static_type_check_packages_and_modules():
     # test_project/python directory in order to find the
     # test_project_python and test_project_python_tests packages
     os.chdir('python')
+    mypy_flags = [
+        '--strict',
+        '--show-error-context',
+        '--show-column-numbers',
+        '--show-error-end',
+        '--pretty',
+        '--show-absolute-path'
+    ]
     package_configs = [
         ['-p', 'test_project_python'],
         ['-p', 'test_project_python_tests'],
     ]
     for package_config in package_configs:
-        print(f'''mypy {' '.join(package_config)}''')
-        mypy.main.main(args=package_config, clean_exit=True)
+        current_config = mypy_flags + package_config
+        print(f'''mypy {' '.join(current_config)}''')
+        mypy.main.main(args=current_config, clean_exit=True)
 
 
 def lint_changed_py_files(changed_py_files):
