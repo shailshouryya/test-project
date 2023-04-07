@@ -57,7 +57,7 @@ def main(
 
 def verify_instance_is_from_type(
     obj:                 Any,
-    acceptable_types:    Union[Type, Tuple],
+    acceptable_types:    Union[Type[Any], Tuple],
     variable_name:       str,
 ) -> Optional[TypeError]:
     if isinstance(acceptable_types, tuple): formatted_acceptable_types = f'one of the following types: {acceptable_types}' # multiple acceptable types
