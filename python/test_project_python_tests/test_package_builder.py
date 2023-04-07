@@ -16,7 +16,7 @@ def main() -> None:
     test_function(data_verify_instance_is_from_type)
 
 
-def test_function(function_data: Tuple[Callable, Collection[Tuple[InputArguments, Description, ExpectedResult]]]):
+def test_function(function_data: Tuple[Callable, Collection[Tuple[InputArguments, Description, ExpectedResult]]]) -> Tuple[int, int, List[Tuple[InputArguments, str, ExpectedResult, Any]]]:
     function, test_cases = function_data
     successes           = 0
     failures            = 0
