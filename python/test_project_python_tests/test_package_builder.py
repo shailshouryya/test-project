@@ -34,7 +34,7 @@ def test_function(function_data: Tuple[Callable, Collection[Tuple[InputArguments
     return (successes, failures, test_case_results)
 
 
-def run_function(function: Callable, input_arguments: InputArguments) -> Any:
+def run_function(function: Callable[..., Any], input_arguments: InputArguments) -> Any:
     try:
         result = function(*input_arguments)
     except Exception as error:
