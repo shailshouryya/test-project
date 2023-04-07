@@ -43,7 +43,7 @@ def run_function(function: Callable[..., Any], input_arguments: InputArguments) 
         return result
 
 
-def format_test_case_result(function: Callable, test_case: Tuple[InputArguments, Description, ExpectedResult, ActualResult]):
+def format_test_case_result(function: Callable[..., Any], test_case: Tuple[InputArguments, Description, ExpectedResult, ActualResult]):
     input_arguments, description, expected_result, actual_result = test_case
     formatted_match = '==' if expected_result == actual_result else '!='
     formatted_test_case_result = f'{description}: {function.__name__}{input_arguments} {formatted_match} {expected_result}'
