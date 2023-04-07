@@ -6,7 +6,7 @@ from test_project_python.package_builder import (
 )
 
 
-InputArguments                         = Tuple
+InputArguments                         = Tuple[Any, ...]
 Description                            = str
 ExpectedResult                         = TypeVar('ExpectedResult')
 ActualResult                           = TypeVar('ActualResult')
