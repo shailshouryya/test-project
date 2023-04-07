@@ -12,7 +12,7 @@ ExpectedResult                         = TypeVar('ExpectedResult')
 ActualResult                           = TypeVar('ActualResult')
 
 
-def main():
+def main() -> None:
     test_function(data_verify_instance_is_from_type)
 
 
