@@ -75,7 +75,7 @@ data_verify_instance_is_from_one_of_multiple_acceptable_types = [
     ('s',   (Collection, none_type), 'str_var'),
     ({},    (Mapping, none_type) ,   'dict_var'),
 ]
-data_verify_instance_is_from_type = [
+data_verify_instance_is_from_type: Tuple[Callable[..., Any], Collection[Tuple[Tuple[Any, ...], str, Any]]] = (
     verify_instance_is_from_type,
     (
         *(
@@ -88,7 +88,7 @@ data_verify_instance_is_from_type = [
         ),
 
     )
-]
+)
 
 
 if __name__ == '__main__':
