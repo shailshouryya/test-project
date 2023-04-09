@@ -16,7 +16,16 @@ def main() -> None:
     test_function(data_verify_instance_is_from_type)
 
 
-def test_function(function_data: Tuple[Callable[..., Any], Collection[Tuple[InputArguments, Description, ExpectedResult]]]) -> Tuple[int, int, List[Tuple[InputArguments, str, ExpectedResult, Any]]]:
+def test_function(
+    function_data: Tuple[
+        Callable[..., Any],
+        Collection[
+            Tuple[
+                InputArguments, Description, ExpectedResult
+            ]
+        ]
+    ]
+) -> Tuple[int, int, List[Tuple[InputArguments, str, ExpectedResult, Any]]]:
     function, test_cases = function_data
     successes           = 0
     failures            = 0
@@ -34,7 +43,10 @@ def test_function(function_data: Tuple[Callable[..., Any], Collection[Tuple[Inpu
     return (successes, failures, test_case_results)
 
 
-def run_function(function: Callable[..., Any], input_arguments: InputArguments) -> Any:
+def run_function(
+    function: Callable[..., Any],
+    input_arguments: InputArguments
+) -> Any:
     try:
         result = function(*input_arguments)
     except Exception as error:
@@ -43,7 +55,10 @@ def run_function(function: Callable[..., Any], input_arguments: InputArguments) 
         return result
 
 
-def format_test_case_result(function: Callable[..., Any], test_case: Tuple[InputArguments, Description, ExpectedResult, ActualResult]) -> str:
+def format_test_case_result(
+    function: Callable[..., Any],
+    test_case: Tuple[InputArguments, Description, ExpectedResult, ActualResult]
+) -> str:
     input_arguments, description, expected_result, actual_result = test_case
     formatted_match = '==' if expected_result == actual_result else '!='
     formatted_test_case_result = f'{description}: {function.__name__}{input_arguments} {formatted_match} {expected_result}'
@@ -75,7 +90,14 @@ data_verify_instance_is_from_one_of_multiple_acceptable_types = [
     ('s',   (Collection, none_type), 'str_var'),
     ({},    (Mapping, none_type) ,   'dict_var'),
 ]
-data_verify_instance_is_from_type: Tuple[Callable[..., Any], Collection[Tuple[Tuple[Any, ...], str, Any]]] = (
+data_verify_instance_is_from_type: Tuple[
+    Callable[..., Any],
+    Collection[
+        Tuple[
+            Tuple[Any, ...], str, Any
+        ]
+    ]
+] = (
     verify_instance_is_from_type,
     (
         *(
