@@ -5,10 +5,11 @@ import mypy.main
 import pylint.lint
 
 
-def main():
+def main() -> None:
     changed_py_files = subprocess.getoutput('git diff --name-only --staged "*.py"').splitlines()
     lint_changed_py_files(changed_py_files)
     static_type_check_packages_and_modules(changed_py_files)
+
 
 
 def static_type_check_packages_and_modules(changed_py_files):
