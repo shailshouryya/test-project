@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+from typing import List
+
 import mypy.main
 import pylint.lint
 
@@ -42,7 +44,9 @@ def static_type_check_packages_and_modules(changed_py_files):
         mypy.main.main(args=current_config, clean_exit=True)
 
 
-def lint_changed_py_files(changed_py_files):
+def lint_changed_py_files(
+    changed_py_files: List[str]
+):
     config_path    = os.path.join('python', '.pylintrc')
     pylint_options = f'--rcfile={config_path}'
     for changed_py_file in changed_py_files:
