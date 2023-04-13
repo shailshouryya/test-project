@@ -46,7 +46,7 @@ def static_type_check_packages_and_modules(changed_py_files):
 
 def lint_changed_py_files(
     changed_py_files: List[str]
-):
+) -> None:
     config_path    = os.path.join('python', '.pylintrc')
     pylint_options = f'--rcfile={config_path}'
     for changed_py_file in changed_py_files:
