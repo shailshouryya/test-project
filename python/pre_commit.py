@@ -13,6 +13,18 @@ def main() -> None:
     static_type_check_packages_and_modules(changed_py_files)
 
 
+def lint_changed_py_files(
+    changed_py_files: List[str]
+) -> None:
+    config_path    = os.path.join('python', '.pylintrc')
+    pylint_options = f'--rcfile={config_path}'
+    for changed_py_file in changed_py_files:
+        # pylint.run_pylint(pylint_options + [changed_py_file])
+        # # calls pylint.lint.Run(argv or sys.argv[1:])
+        # # but does not allow specifying the reporter, exit, do_exit
+        # # arguments to pylint.lint.Run.__init__
+        pylint.lint.Run(args=[pylint_options, changed_py_file], exit=False)
+
 
 def static_type_check_packages_and_modules(
     changed_py_files: List[str]
@@ -44,20 +56,6 @@ def static_type_check_packages_and_modules(
         current_config = mypy_flags + [changed_py_file]
         print(f'''mypy {' '.join(current_config)}''')
         mypy.main.main(args=current_config, clean_exit=True)
-
-
-def lint_changed_py_files(
-    changed_py_files: List[str]
-) -> None:
-    config_path    = os.path.join('python', '.pylintrc')
-    pylint_options = f'--rcfile={config_path}'
-    for changed_py_file in changed_py_files:
-        # pylint.run_pylint(pylint_options + [changed_py_file])
-        # # calls pylint.lint.Run(argv or sys.argv[1:])
-        # # but does not allow specifying the reporter, exit, do_exit
-        # # arguments to pylint.lint.Run.__init__
-        pylint.lint.Run(args=[pylint_options, changed_py_file], exit=False)
-
 
 
 if __name__ == '__main__':
