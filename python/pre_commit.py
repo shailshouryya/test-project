@@ -16,7 +16,7 @@ def main() -> None:
 
 def static_type_check_packages_and_modules(
     changed_py_files: List[str]
-):
+) -> None:
     # the pre-commit-nix file located in ./.git/hooks/pre-commit
     # calls this (pre_commit.py) module from the test_project
     # directory, so this module needs to move into the
