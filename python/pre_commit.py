@@ -34,7 +34,7 @@ def static_type_check_packages_and_modules(
     # directory, so this module needs to move into the
     # test_project/python directory in order to find the
     # test_project_python and test_project_python_tests packages
-    os.chdir('python') # change into python directory to allow mypy to find test_project_python package
+    # os.chdir('python') # change into python directory to allow mypy to find test_project_python package
     mypy_flags = [
         '--strict',
         '--show-error-context',
@@ -44,14 +44,14 @@ def static_type_check_packages_and_modules(
         '--show-absolute-path'
     ]
     package_configs = [
-        ['-p', 'test_project_python'],
-        ['-p', 'test_project_python_tests'],
+        ['-p', 'python.test_project_python'],
+        ['-p', 'python.test_project_python_tests'],
     ]
     for package_config in package_configs:
         current_config = mypy_flags + package_config
         print(f'''mypy {' '.join(current_config)}''')
         mypy.main.main(args=current_config, clean_exit=True)
-    os.chdir('..')   # change back to root directory to allow relative paths to work properly from pre-commit hook (which runs from the root directory of the git repo)
+    # os.chdir('..')   # change back to root directory to allow relative paths to work properly from pre-commit hook (which runs from the root directory of the git repo)
     for changed_py_file in changed_py_files:
         current_config = mypy_flags + [changed_py_file]
         print(f'''mypy {' '.join(current_config)}''')
