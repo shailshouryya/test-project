@@ -1,0 +1,24 @@
+'''
+This py.typed file makes this package (test_project_python)
+a PEP 561 compliant stub package.
+
+Make sure to add a `package_data` argument consisting of
+a `dict` with the key(s) corresponding to the package name(s)
+and the value(s) corresponding to the file(s) in that package
+that contain the type hint information to the `setup`
+function (e.g. in `distutils.core.setup` or `setuptools.setup`).
+If the type hint information is contained in inline type annotations,
+a `py.typed` file should suffice.
+
+```
+package_data={"package_name": ["py.typed"]},
+# OR if the package has stub files (ending in .pyi)
+package_data={"package_name": ["py.typed", "module1.pyi", "module2.pyi"]},
+```
+
+Read the following for more information:
+- https://mypy.readthedocs.io/en/stable/installed_packages.html
+- https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-library-stubs-or-py-typed-marker
+- https://mypy.readthedocs.io/en/stable/stubs.html#stub-files
+- https://peps.python.org/pep-0561/
+'''
